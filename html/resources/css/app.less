@@ -32,6 +32,7 @@ a {
 input,
 button {
     font-size: 1em;
+    margin:0;
 
     &.button {
         display: inline-block;
@@ -43,6 +44,7 @@ button {
         padding: 0 1.6em;
         border-radius: 3px;
         border: none;
+        cursor: pointer;
 
         &.simple-button {
             background: #F8F9FA;
@@ -57,7 +59,7 @@ button {
 
 body {
     &.normal-page {
-        background: #EEF0F3;
+        background: #f1f3f7;
     }
 
     &.simple-page {
@@ -184,14 +186,21 @@ body {
     margin:0 -15px;
 
     .item {
-        width: 135px;
-        background-color: #fff;
+        width: 168px;
         float: left;
-        margin: 0 15px;
         margin-bottom: 30px;
         text-align: center;
-        padding: 15px 0;
-        border-radius: 3px;
+
+        .inside {
+            background-color: #fff;
+            margin: 0 15px;
+            padding: 15px 0;
+            border-radius: 3px;
+        }
+    }
+
+    a.button {
+        width:60px;
     }
 
     .title {
@@ -392,6 +401,7 @@ body {
                 font-size: 2em;
                 font-family: sans-serif;
                 background: transparent;
+                color:#666666;
             }
 
             textarea {
