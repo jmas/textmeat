@@ -130,6 +130,10 @@ body {
     line-height: 60px;
     z-index: 1000;
 
+    .control {
+        padding: 0 15px;
+    }
+
     a {
         color:#666666;
         display: inline-block;
@@ -145,38 +149,48 @@ body {
 .text-list {
     .item {
         background: #fff;
-        margin-bottom:1px;
+        margin-bottom: 1px;
         padding: 30px 15px;
         border-radius: 3px;
-    }
 
-    .title {
-        font-size: 1.2em;
-        margin-bottom: 15px;
-        color:#434343;
-
-        a {
+        .title {
+            font-size: 1.2em;
+            margin-bottom: 15px;
             color:#434343;
+
+            a {
+                color:#434343;
+            }
         }
-    }
 
-    .summary {
-        margin-bottom: 15px;
-        color:#666666;
-        font-size: .95em;
-        line-height: 1.5em;
+        .summary {
+            margin-bottom: 15px;
+            color: #666666;
+            font-size: .95em;
+            line-height: 1.5em;
 
-        a {
-            color:#666666;
+            a {
+                color:#666666;
+            }
+        }
+
+        &:hover {
+            .summary {
+                color: #434343;
+            }
         }
     }
 
     .meta {
         font-size: .8em;
-        color:#b7b7b7;
+        color: #b7b7b7;
 
         a {
-            color:#b7b7b7;
+            color: #b7b7b7;
+
+            &:hover {
+                color: #666666;
+            }
         }
 
         .user {
@@ -188,10 +202,14 @@ body {
 
             a {
                 display: inline-block;
-                background-color: #b7b7b7;
+                background: #b7b7b7;
                 color: #fff;
                 border-radius: 3px;
                 padding: 0 .5em;
+
+                &:hover {
+                    background: #666666;
+                }
             }
         }
     }
@@ -464,7 +482,7 @@ body {
 }
 
 .text-explore-container {
-    padding: 90px 0;
+    padding: 90px 15px;
 }
 
 .text-explore {
