@@ -7,6 +7,7 @@ html, body {
 a {
     text-decoration: none;
     color: #6fa8dc;
+    transition: .3s;
 
     &.button {
         display: inline-block;
@@ -17,6 +18,7 @@ a {
         line-height: 2.4em;
         padding: 0 1.6em;
         border-radius: 3px;
+        transition: 0;
 
         &.simple-button {
             background: #F8F9FA;
@@ -175,8 +177,20 @@ body {
         }
 
         &:hover {
+            transition: .3s;
+
             .summary {
                 color: #434343;
+            }
+
+            a {
+                color: #6fa8dc;
+            }
+
+            .topics {
+                a {
+                    background: #6fa8dc;
+                }
             }
         }
     }
@@ -233,6 +247,16 @@ body {
             margin: 0 15px;
             padding: 15px 0;
             border-radius: 3px;
+        }
+
+        &:hover {
+            transition: .3s;
+
+            .title {
+                a {
+                    color: #6fa8dc;
+                }
+            }
         }
     }
 
