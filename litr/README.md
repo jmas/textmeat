@@ -1,0 +1,2 @@
+# litr
+### a Sails application
