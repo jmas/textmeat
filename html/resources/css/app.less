@@ -87,6 +87,10 @@ body {
         &.button {
             color:#fff;
         }
+
+        &:hover {
+            color: #434343;
+        }
     }
 
     ul {
@@ -105,7 +109,7 @@ body {
             height: 57px;
 
             a {
-                color:#434343;
+                color: #434343;
             }
         }
     }
@@ -119,6 +123,10 @@ body {
 
     .add-button {
         font-weight: bold;
+
+        &:hover {
+            color: #fff;
+        }
     }
 }
 
@@ -149,6 +157,8 @@ body {
 }
 
 .text-list {
+    transition: .5s;
+
     .item {
         background: #fff;
         margin-bottom: 1px;
@@ -191,6 +201,16 @@ body {
                 a {
                     background: #6fa8dc;
                 }
+            }
+        }
+    }
+
+    &:hover {
+        .item {
+            opacity: .8;
+
+            &:hover {
+                opacity: 1;
             }
         }
     }

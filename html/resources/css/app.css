@@ -77,6 +77,9 @@ body.simple-page {
 .nav a.button {
   color: #fff;
 }
+.nav a:hover {
+  color: #434343;
+}
 .nav ul {
   margin: 0;
   padding: 0;
@@ -103,6 +106,9 @@ body.simple-page {
 .nav .add-button {
   font-weight: bold;
 }
+.nav .add-button:hover {
+  color: #fff;
+}
 .simple-nav {
   position: fixed;
   top: 0;
@@ -122,6 +128,9 @@ body.simple-page {
 }
 .page-container .container {
   padding: 30px 0;
+}
+.text-list {
+  transition: .5s;
 }
 .text-list .item {
   background: #fff;
@@ -157,6 +166,12 @@ body.simple-page {
 }
 .text-list .item:hover .topics a {
   background: #6fa8dc;
+}
+.text-list:hover .item {
+  opacity: .8;
+}
+.text-list:hover .item:hover {
+  opacity: 1;
 }
 .text-list .meta {
   font-size: .8em;
