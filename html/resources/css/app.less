@@ -215,9 +215,12 @@ body {
     }
 }
 
+.topic-container {
+    overflow: hidden;
+}
+
 .topic-list {
     overflow: hidden;
-    margin:0 -15px;
 
     .item {
         width: 168px;
@@ -260,6 +263,12 @@ body {
         width: 100%;
         overflow: hidden;
     }
+}
+
+@media (min-width: 810px) {
+  .topic-list {
+    margin:0 -15px;
+  }
 }
 
 .user-text-container {
@@ -500,10 +509,16 @@ body {
             margin:0 -15px;
             background-color: #F8F9FA;
             font-family: monospace;
+            overflow: auto;
+            border-radius: 3px;
         }
     }
 
     h1, h2 {
         font-weight: normal;
+    }
+
+    h1, h2, h3, h4, h5 {
+        line-height: 1.3em;
     }
 }
