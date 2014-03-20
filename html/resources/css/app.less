@@ -10,8 +10,8 @@ a {
 
     &.button {
         display: inline-block;
-        background:#6fa8dc;
-        color:#fff;
+        background: #6fa8dc;
+        color: #fff;
         vertical-align: middle;
         height: 2.4em;
         line-height: 2.4em;
@@ -36,8 +36,8 @@ button {
 
     &.button {
         display: inline-block;
-        background:#6fa8dc;
-        color:#fff;
+        background: #6fa8dc;
+        color: #fff;
         vertical-align: middle;
         height: 2.4em;
         line-height: 2.4em;
@@ -117,6 +117,22 @@ body {
 
     .add-button {
         font-weight: bold;
+    }
+}
+
+.simple-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    height: 60px;
+    line-height: 60px;
+    z-index: 1000;
+
+    a {
+        color:#666666;
+        display: inline-block;
     }
 }
 
@@ -391,6 +407,10 @@ body {
     }
 }
 
+.form-container {
+    padding: 15px;
+}
+
 .large-form {
     .field {
         margin:30px 0;
@@ -440,5 +460,32 @@ body {
         a {
             font-size: 1.5em;
         }
+    }
+}
+
+.text-explore-container {
+    padding: 90px 0;
+}
+
+.text-explore {
+    font-size: 1.2em;
+    line-height: 1.5em;
+    color: #434343;
+
+    p {
+        margin: 2em 0;
+    }
+
+    pre {
+        & {
+            padding: 15px;
+            margin:0 -15px;
+            background-color: #F8F9FA;
+            font-family: monospace;
+        }
+    }
+
+    h1, h2 {
+        font-weight: normal;
     }
 }

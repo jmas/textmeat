@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>text-view</title>
+    </head>
+    <body class="simple-page text-page">
+
+        <div class="simple-nav">
+            <div class="container">
+                <div class="control">
+                    <a class="button simple-button" href="user-index.html">Back</a>
+                    <a class="button simple-button" href="#">Visit Original</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="text-explore-container">
+                <div class="text-explore">
+                    <h1>User Authentication with Sails.js</h1>
+
+                    <p>I’m really enjoying the Sails.js framework. I see a lot of potential here for use on ‘real’ work, plus it’s just a really cool idea. I’m going to start building an example application using Sails and the first step is user authentication. I’m going to be building this as an API, so all of the example will simply use GET and POST requests to the <a href="#">REST API</a> that Sails makes so easy for us. Let’s dive in.</p>
+
+                    <h2>What is Sails.js?</h2>
+
+                    <p>Sails is an awesome Node.js MVC framework for creating realtime apps. I wrote a blog post about it recently, go check it out.</p>
+
+                    <h2>Installing Sails.js</h2>
+
+                    <p>In an effort to avoid repeating information I am going to point you to the Getting Started page for Sails.js. There is great instructions for getting up and running.</p>
+
+                    <h2>Creating the user resource</h2>
+
+                    <p>Since what we are trying to do is accomplish user authentication, the first thing we need to do is create our user resource. Since Sails provides us with generators similar to the way Rails works, we can do this with one simple command.</p>
+
+                    <pre>$ sails generate user</pre>
+
+                    <p>This will create a user model file at api/models/User.js and a controller file for the user at api/controllers/UserController.js</p>
+
+                    <h2>Adding necessary attributes</h2>
+
+                    <p>We need a couple different attributes on our user model. Primarily all we need is some sort of unique primary key to identify the user, this can be a username or email. For this example we will go with an email address. We’ll also need an attribute to store the encrypted password.</p>
+
+                    <p>Open up the model file located at api/models/User.js and modify the attributes block to include these new attributes..</p>
+
+                    <pre>module.exports = {
+  attributes: {
+    email    : 'string',
+    password : 'string'
+  }
+};</pre>
+
+                    <p>Now let’s move on to user creation via registration.</p>
+
+                    <h2>Handling registration</h2>
+
+                    <p>With this in place we can now send REST formatted requests to /user. A GET request to see a list of users, and a POST request with attached attributes to create a new user.</p>
+
+                    <p>However, we don’t want to be sending the password hash directly over the network. Instead we want to give Sails an unencrypted password and have a model hook on the backend that handles encryption for us.</p>
+
+                    <p>For encryption we are going to use the node-bcrypt module. It’s awesome, that’s all that needs to be said. For more information on why bcrypt is the way to go, check out this article.</p>
+
+                    <p>To handle the encryption within the flow of user creation, we can use the model hook beforeCreate. This will do exactly what it sounds like and run a function before the creation of a user takes place. This will go in our model file located at api/models/User.js.</p>
+                </div>
+            </div>
+        </div>
+
+        <link rel="stylesheet/less" type="summary/css" href="resources/css/app.less" />
+        <script src="resources/js/less-1.7.0.min.js"></script>
+
+    </body>
+</html>
