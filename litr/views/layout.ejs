@@ -11,9 +11,9 @@
     <div class="nav">
         <div class="container">
             <ul>
-                <li class="active"><a href="/user/index"><%= user.name ? user.name: user.email %></a></li>
-                <li><a href="/text/index">Reading</a></li>
-                <li><a href="/topic/index">Topics</a></li>
+                <li <%- target.controller === 'user' ? 'class="active"': '' %>><a href="/user/index"><%= user.name ? user.name: user.email ? user.email: 'Nobody' %></a></li>
+                <li <%- target.controller === 'text' ? 'class="active"': '' %>><a href="/text/index">Reading</a></li>
+                <li <%- target.controller === 'topic' ? 'class="active"': '' %>><a href="/topic/index">Topics</a></li>
             </ul>
             <ul class="second">
                 <li><a class="button add-button" href="/text/add">+</a></li>

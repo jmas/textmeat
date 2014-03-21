@@ -19,9 +19,9 @@ module.exports = {
   
   index: function(req, res) {
     User.findOne({ id: req.session.user }, function(err, user) {
-      if (err) res.json({ error: 'DB error' }, 500);
+      if (err) return res.json({ error: 'DB error' }, 500);
       
-      res.view({
+      return res.view({
         user: user
       });
     });
@@ -31,24 +31,24 @@ module.exports = {
     var bcrypt = require('bcrypt');
 
     User.findOneByEmail(req.query.email).done(function (err, user) {
-      if (err) res.json({ error: 'DB error' }, 500);
+      if (err) return res.json({ error: 'DB error' }, 500);
 
       if (user) {
         bcrypt.compare(req.query.password, user.password, function (err, match) {
-          if (err) res.json({ error: 'Server error' }, 500);
+          if (err) return res.json({ error: 'Server error' }, 500);
 
           if (match) {
             // password match
             req.session.user = user.id;
-            res.json(user);
+            return res.json(user);
           } else {
             // invalid password
             if (req.session.user) req.session.user = null;
-            res.json({ error: 'Invalid password' }, 400);
+            return res.json({ error: 'Invalid password' }, 400);
           }
         });
       } else {
-        res.json({ error: 'User not found' }, 404);
+        return res.json({ error: 'User not found' }, 404);
       }
     });
   },

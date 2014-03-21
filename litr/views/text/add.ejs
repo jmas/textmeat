@@ -13,7 +13,8 @@
         </div>
         <div class="field">
             <div class="element">
-                <textarea class="element-textarea" placeholder="Text" name="content" data-content-el></textarea>
+                <div class="element-editor" data-content-editor-el></div>
+                <textarea style="display:none;" class="element-textarea" placeholder="Text" name="content" data-content-el></textarea>
             </div>
         </div>
         <div class="control">
@@ -23,14 +24,33 @@
     </form>
 </div>
 
+<link rel="stylesheet" href="/js/jquery-notebook/src/js/jquery.notebook.css" />
+<script src="/js/jquery-notebook/src/js/jquery.notebook.js"></script>
+
 <script>
 
 (function() {
 
+$.fn.notebook.defaults = {
+    autoFocus: false,
+    placeholder: 'Text',
+    mode: 'multiline', // multiline or inline
+    modifiers: ['bold', 'italic', 'underline', 'h1', 'h2', 'ol', 'ul', 'anchor']
+};
+
 var urlEl = $('[data-url-el]'),
     titleEl = $('[data-title-el]'),
     contentEl = $('[data-content-el]');
+    contentEditorEl = $('[data-content-editor-el]');
 
+contentEditorEl.notebook();
+
+// Editor
+contentEditorEl.on('contentChange', function(e) {
+  contentEl.val(contentEditorEl.html());
+});
+
+// Url
 urlEl.on('change', function() {
   var url = this.value;
 
@@ -42,6 +62,7 @@ urlEl.on('change', function() {
 
       if (data.contents) {
         contentEl.val(data.contents);
+        contentEditorEl.html(data.contents);
       }
     }
   });

@@ -17,25 +17,26 @@ module.exports.policies = {
   // Default policy for all controllers and actions
   // (`true` allows public access) 
   '*': true,
+  '*': 'modifyRequest'
 
-  TextController: {
-  	'*': true,
+  // TextController: {
+  // 	'*': true,
 
-  	'index': 'isAuthenticated'
-  	// 'view': '',
-  },
+  // 	'index': 'isAuthenticated'
+  // 	// 'view': '',
+  // },
 
-  UserController: {
-  	'index': 'isAuthenticated',
-  	// 'view': '',
-  	'setting': 'isAuthenticated',
-  	'logout': 'isAuthenticated'
-  },
+  // UserController: {
+  // 	'index': 'isAuthenticated',
+  // 	// 'view': '',
+  // 	'setting': 'isAuthenticated',
+  // 	'logout': 'isAuthenticated'
+  // },
 
-  TopicController: {
-  	'index': 'isAuthenticated'
-  	// 'view': ''
-  }
+  // TopicController: {
+  // 	'index': 'isAuthenticated'
+  // 	// 'view': ''
+  // }
 
   /*
 	// Here's an example of adding some policies to a controller

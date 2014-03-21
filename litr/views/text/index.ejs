@@ -1,0 +1,20 @@
+<div class="text-container">
+    <div class="text-list">
+        <% _.each(texts, function (model) { %>
+        <div class="item">
+            <div class="title"><a href="/text/view?id=<%= model.id %>"><%= model.title %></a></div>
+            <div class="summary">
+                <%- model.content %>
+            </div>
+            <div class="meta">
+                <span class="topics">
+                    <a href="#">HTML</a>
+                    <a href="#">JavaScript</a>
+                </span>
+                <span class="user"><a href="#">Александр</a></span>
+                <span class="date">20 April</span>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>

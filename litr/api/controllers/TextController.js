@@ -45,7 +45,7 @@ module.exports = {
     var obj, url, cleanedHtml,
         readability = require('node-readability'),
         sanitizeHtml = require('sanitize-html'),
-        toMd = require('html-md');
+        htmlToMd = require('html-md');
 
     if (! req.query.url) {
       return res.json({ error: 'param url should be present' }, 500);
@@ -60,7 +60,7 @@ module.exports = {
         cleanedHtml = sanitizeHtml(doc.getContent(), {
           allowedTags: [ 'h3', 'h4', 'h5', 'h6', 'blockquote',
           'p', 'a', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong',
-          'em', 'strike', 'code', 'hr', 'br',
+          'em', 'strike', 'code', 'hr', 'br', 'img',
           'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td',
           'pre' ],
           allowedAttributes: {
@@ -77,7 +77,7 @@ module.exports = {
 
         cleanedHtml = cleanedHtml.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/ig, "\n");
 
-        cleanedHtml = toMd(cleanedHtml);
+        // cleanedHtml = htmlToMd(cleanedHtml);
 
         obj = {
             'url': url,
@@ -86,6 +86,18 @@ module.exports = {
         };
 
         res.json(obj);
+    });
+  },
+
+  view: function(req, res) {
+    console.log(req);
+    Text.findOne({ id: req.query.id }, function(err, model) {
+      if (err) return res.json({ error: 'DB error' }, 500);
+      
+      return res.view({
+        layout: 'simple_layout',
+        text: model
+      });
     });
   },
 
