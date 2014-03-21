@@ -3,9 +3,6 @@
         <% _.each(texts, function (model) { %>
         <div class="item">
             <div class="title"><a href="/text/view?id=<%= model.id %>"><%= model.title %></a></div>
-            <div class="summary">
-                <%- model.content %>
-            </div>
             <div class="meta">
                 <span class="topics">
                     <a href="#">HTML</a>

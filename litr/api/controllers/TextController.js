@@ -44,8 +44,8 @@ module.exports = {
   parse: function(req, res) {
     var obj, url, cleanedHtml,
         readability = require('node-readability'),
-        sanitizeHtml = require('sanitize-html'),
-        htmlToMd = require('html-md');
+        sanitizeHtml = require('sanitize-html');//,
+        // htmlToMd = require('html-md');
 
     if (! req.query.url) {
       return res.json({ error: 'param url should be present' }, 500);
@@ -57,25 +57,29 @@ module.exports = {
     readability.read(url, function(err, doc) {
         if (err) return res.json({ error: err.toString() }, 500);
 
-        cleanedHtml = sanitizeHtml(doc.getContent(), {
-          allowedTags: [ 'h3', 'h4', 'h5', 'h6', 'blockquote',
-          'p', 'a', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong',
-          'em', 'strike', 'code', 'hr', 'br', 'img',
-          'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td',
-          'pre' ],
-          allowedAttributes: {
-            a: [ 'href', 'name', 'target' ],
-            // We don't currently allow img itself by default, but this
-            // would make sense if we did
-            img: [ 'src' ]
-          },
-          // Lots of these won't come up by default because
-          // we don't allow them
-          selfClosing: [ 'img', 'br', 'hr', 'area', 'base',
-            'basefont', 'input', 'link', 'meta' ]
-        }).trim();
+        cleanedHtml = doc.getContent();
 
-        cleanedHtml = cleanedHtml.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/ig, "\n");
+        if (cleanedHtml) {
+          cleanedHtml = sanitizeHtml(cleanedHtml, {
+            allowedTags: [ 'h3', 'h4', 'h5', 'h6', 'blockquote',
+            'p', 'a', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong',
+            'em', 'strike', 'code', 'hr', 'br', 'img',
+            'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td',
+            'pre' ],
+            allowedAttributes: {
+              a: [ 'href', 'name', 'target' ],
+              // We don't currently allow img itself by default, but this
+              // would make sense if we did
+              img: [ 'src' ]
+            },
+            // Lots of these won't come up by default because
+            // we don't allow them
+            selfClosing: [ 'img', 'br', 'hr', 'area', 'base',
+              'basefont', 'input', 'link', 'meta' ]
+          }).trim();
+
+          cleanedHtml = cleanedHtml.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/ig, "\n");
+        }
 
         // cleanedHtml = htmlToMd(cleanedHtml);
 

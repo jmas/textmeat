@@ -14,26 +14,26 @@
 
 module.exports.adapters = {
 
-  'default': 'mongo',
+  // 'default': 'mongo',
 
-  mongo: {
-    module: 'sails-mongo',
-    host: 'localhost',
-    port: 27017,
-    // user: 'username',
-    // password: 'password',
-    database: 'litr'
-  }
+  // mongo: {
+  //   module: 'sails-mongo',
+  //   host: 'localhost',
+  //   port: 27017,
+  //   // user: 'username',
+  //   // password: 'password',
+  //   database: 'litr'
+  // }
 
   // If you leave the adapter config unspecified 
   // in a model definition, 'default' will be used.
-  // 'default': 'disk',
+  'default': 'disk',
 
   // Persistent adapter for DEVELOPMENT ONLY
   // (data is preserved when the server shuts down)
-  // disk: {
-  //   module: 'sails-disk'
-  // },
+  disk: {
+    module: 'sails-disk'
+  }
 
   // MySQL is the world's most popular relational database.
   // Learn more: http://en.wikipedia.org/wiki/MySQL

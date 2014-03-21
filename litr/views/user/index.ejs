@@ -1,20 +1,20 @@
 <div class="user-summary">
-    <div class="image" style="background-image:url(http://www.gravatar.com/avatar/<%= user.emailMd5() %>?d=mm);"></div>
-    <div class="name"><%= user.name ? user.name: user.email %></div>
-    <div class="summary"><%= user.about ? user.about: '' %></div>
+    <div class="image" style="background-image:url(http://www.gravatar.com/avatar/<%= user ? user.emailMd5(): '' %>?d=mm);"></div>
+    <div class="name"><%= user && user.name ? user.name: user ? user.email: 'User' %></div>
+    <div class="summary"><%= user && user.about ? user.about: '' %></div>
     <div class="meta">
         <div class="stat">
             <div class="item">
                 <div class="title">Texts</div>
-                <div class="count"><%= user.textsCount ? user.textsCount: 0 %></div>
+                <div class="count"><%= user && user.textsCount ? user.textsCount: 0 %></div>
             </div>
             <div class="item">
                 <div class="title">Readers</div>
-                <div class="count"><%= user.readersCount ? user.readersCount: 0 %></div>
+                <div class="count"><%= user && user.readersCount ? user.readersCount: 0 %></div>
             </div>
             <div class="item">
                 <div class="title">Reading</div>
-                <div class="count"><%= user.readingCount ? user.readingCount: 0 %></div>
+                <div class="count"><%= user && user.readingCount ? user.readingCount: 0 %></div>
             </div>
         </div>
         <div class="control">
