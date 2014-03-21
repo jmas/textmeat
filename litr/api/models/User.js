@@ -10,7 +10,11 @@ module.exports = {
 
   attributes: {
     
-    name: 'string',
+    // fields
+    name: {
+      type: 'string',
+      required: true
+    },
     email: {
       type: 'string',
       unique: true,
@@ -38,6 +42,11 @@ module.exports = {
       defaultsTo: 'Few words about me.'
     },
 
+    // associations
+    texts: {
+      collection: 'Text'
+    },
+
     emailMd5: function() {
       var crypto = require('crypto');
       return crypto.createHash('md5').update(this.email).digest('hex');
@@ -48,7 +57,6 @@ module.exports = {
       delete obj.password;
       return obj;
     }
-    
   },
 
   beforeCreate: function (attrs, next) {

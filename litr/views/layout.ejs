@@ -1,46 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <!--
-        For demonstration purposes, the `title` is dynamically set here based on
-        your `sails.config.appName` to show that you can inject data into layouts
-        exactly the same way as with your other view templates.
-    -->
+    <meta charset="utf-8" />
     <title><%- title %></title>
-
-    <!-- Viewport mobile tag for sensible mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-
-    <!--
-
-      Stylesheets
-      ========================
-
-      You can link any CSS, LESS, or image files in your `assets` directory
-      as you would normally: using <link/> tags.
-      
-    -->
-
-    <!--
-
-      Support for LESS included by default
-      ================================================
-
-      LESS files are automatically compiled when they change using the Gruntfile
-      located in the top-level of this Sails app.  If you run into issues with styles
-      not reloading, check the Sails log output in your console for LESS compilation errors.
-      If necessary, shut down and then lift your app again.
-      
-    -->
-
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" onerror="this.src='/js/jquery.min.js';"></script>
   </head>
-
-  <body class="normal-page user-page">
+  <body class="normal-page">
 
     <div class="nav">
         <div class="container">
             <ul>
-                <li class="active"><a href="/user/index"><%= user.name %></a></li>
+                <li class="active"><a href="/user/index"><%= user.name ? user.name: user.email %></a></li>
                 <li><a href="/text/index">Reading</a></li>
                 <li><a href="/topic/index">Topics</a></li>
             </ul>

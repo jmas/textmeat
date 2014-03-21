@@ -10,10 +10,17 @@ module.exports = {
 
   attributes: {
   	
-  	/* e.g.
-  	nickname: 'string'
-  	*/
+  	url: 'string',
+  	title: 'string',
+  	content: 'text'
     
-  }
+  },
 
+  beforeValidation: function(attrs, next) {
+    if (! attrs.url || (! attrs.title && ! attrs.content)) {
+      return next('url or title, content should be present');
+    }
+
+    return next();
+  }
 };

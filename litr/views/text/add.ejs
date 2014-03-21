@@ -1,0 +1,52 @@
+<div class="form-container">
+    <form class="large-form" action="/text/create" method="post">
+        <div class="field">
+            <div class="element">
+                <input class="element-input" type="text" placeholder="URL" autofocus name="url" data-url-el />
+            </div>
+        </div>
+        <div class="separator"><span>or</span></div>
+        <div class="field">
+            <div class="element">
+                <input class="element-input" type="text" placeholder="Title" name="title" data-title-el />
+            </div>
+        </div>
+        <div class="field">
+            <div class="element">
+                <textarea class="element-textarea" placeholder="Text" name="content" data-content-el></textarea>
+            </div>
+        </div>
+        <div class="control">
+            <input class="button" type="submit" value="Add" />
+            <a class="button simple-button" href="/text/index">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+
+(function() {
+
+var urlEl = $('[data-url-el]'),
+    titleEl = $('[data-title-el]'),
+    contentEl = $('[data-content-el]');
+
+urlEl.on('change', function() {
+  var url = this.value;
+
+  $.get('/text/parse?url='+url).done(function(data) {
+    if (! data.error) {
+      if (data.title) {
+        titleEl.val(data.title);
+      }
+
+      if (data.contents) {
+        contentEl.val(data.contents);
+      }
+    }
+  });
+});
+
+})();
+
+</script>
