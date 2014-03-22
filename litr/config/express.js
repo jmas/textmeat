@@ -1,3 +1,16 @@
+function readConfig(cb) {
+  var fs = require('fs');
+  var file = __dirname + '/api/config.json';
+   
+  fs.readFile(file, 'utf8', function (err, data) {
+    if (err) return res.json({ error: err.toString() }, 500);
+   
+    data = JSON.parse(data);
+
+    cb(data);
+  });
+};
+
 module.exports.express = {
     customMiddleware: function(app){
         app.use(function(req, res, next) {
@@ -9,10 +22,16 @@ module.exports.express = {
 
                 res.locals.sessionUser = user;
                 
-                next();
+                readConfig(function(data) { 
+                  res.locals.apiConfig = data;
+                  next();
+                });
               });
           } else {
+            readConfig(function(data) { 
+              res.locals.apiConfig = data;
               next();
+            });
           }
         });
     }

@@ -1,5 +1,5 @@
 /**
- * TextController
+ * RecordController
  *
  * @module      :: Controller
  * @description :: A set of functions called `actions`.
@@ -18,7 +18,7 @@
 module.exports = {
 
   index: function(req, res) {
-    Text.find().sort('createdAt').exec(function(err, models) {
+    Record.find().sort({'createdAt': -1}).exec(function(err, models) {
       if (err) return res.json({ error: err.toString() }, 500);
 
       return res.view({
@@ -34,7 +34,7 @@ module.exports = {
   },
 
   create: function(req, res) {
-    Text.create(req.body, function(err, model) {
+    Record.create(req.body, function(err, model) {
       if (err) return res.json({ error: err.toString() }, 500);
 
       return res.json(model);
@@ -95,7 +95,7 @@ module.exports = {
 
   view: function(req, res) {
     console.log(req);
-    Text.findOne({ id: req.query.id }, function(err, model) {
+    Record.findOne({ id: req.query.id }, function(err, model) {
       if (err) return res.json({ error: 'DB error' }, 500);
       
       return res.view({

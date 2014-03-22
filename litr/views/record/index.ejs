@@ -1,0 +1,32 @@
+<div class="text-container">
+    <div class="feed-list">
+        <% _.each(texts, function (model) { %>
+        <div class="item">
+            <div class="user">
+                <span class="image" style="background-image:url(http://www.gravatar.com/avatar/<%= sessionUser ? sessionUser.emailMd5(): '' %>?d=mm&1);"></span>
+                <span class="name"><a href="<%- apiConfig.userViewUrl %>">Maslakov Alexander</a></span>
+            </div>
+            <div class="record">
+                <div class="summary">
+                    Few lines of text.
+                </div>
+            </div>
+            <div class="data-link">
+                <div class="image" style="background-image:url(http://habrastorage.org/getpro/habr/post_images/1ad/e5b/58f/1ade5b58f76e3db5a54042dd32497880.jpg);"></div>
+                <div class="summary">
+                    <div class="title">
+                        <a href="<%- apiConfig.recordViewUrl %>?id=<%- model.id %>"><%= model.title %></a>
+                        <a class="shortcut-link" href="<%= model.url %>" target="_blank"></a>
+                    </div>
+                    <div class="text">
+                        Виртуальный сервер eVPS – это идеальное решение для проектов, которым необходима максимальная гарантия работоспособности сервера. Мощность виртуального сервера измеряется в условных единицах — vsu (virtual server unit), график использования будет доступен вам в контрольной панели. Для любого тарифного плана в любое время доступна мощность в 256 vsu. Однако если Ваш сервер регулярно (в течение месяца) будет потреблять мощность свыше оплаченной, вам будет предложено перейти на другой тарифный план.
+                    </div>
+                </div>
+            </div>
+            <div class="meta">
+                <span class="date">20 April</span>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>

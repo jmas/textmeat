@@ -1,0 +1,8 @@
+{
+	"recordIndexUrl": "/record/index",
+	"recordViewUrl": "/record/view",
+	"recordParseUrl": "/record/parse",
+	"recordCreateUrl": "/record/create",
+	"userIndexUrl": "/user/index",
+	"userViewUrl": "/user/view"
+}

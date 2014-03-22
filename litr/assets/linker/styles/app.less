@@ -156,16 +156,102 @@ body {
     }
 }
 
-.text-list {
+.feed-list {
     transition: .5s;
 
     .item {
         background: #fff;
         margin-bottom: 1px;
-        padding: 30px 15px;
+        padding: 15px;
         border-radius: 3px;
+        color: #666666;
 
-        .title {
+        a {
+            color: #b7b7b7;
+
+            /*&:hover {
+                color: #666666;
+            }*/
+        }
+
+        .user {
+            line-height: 16px;
+            font-size: .8em;
+            margin-bottom: 15px;
+
+            .image {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                vertical-align: middle;
+                border-radius: 50%;
+                margin-right: 5px;
+                background-color: #cfe2f3;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center center;
+            }
+
+            .name {
+                vertical-align: middle;
+            }
+        }
+
+        .record {
+            margin-bottom: 15px;
+
+            .summary {
+                font-size: .9em;
+                line-height: 1.5em;
+            }
+        }
+
+        .data-link {
+            overflow: hidden;
+            margin-bottom: 15px;
+
+            .image {
+                width: 75px;
+                height: 75px;
+                float: left;
+                margin-right: 15px;
+                margin-top: .2em;
+                background-color: #cfe2f3;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center center;
+                border-radius: 3px;
+            }
+
+            .title {
+                margin-bottom: 5px;
+
+                .shortcut-link {
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    background-image: url(/images/shortcut.png);
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    margin-left: 5px;
+                    vertical-align: middle;
+                }
+
+                a {
+                    color: #434343;
+                }
+            }
+
+            .text {
+                font-size: .8em;
+                overflow: hidden;
+                line-height: 1.5em;
+                color: #666666;
+            }
+        }
+
+        /*.title {
             font-size: 1.2em;
             line-height: 1.4em;
             margin-bottom: 15px;
@@ -178,9 +264,9 @@ body {
                     color: #666666;
                 }
             }
-        }
+        }*/
 
-        .summary {
+        /*.summary {
             margin-bottom: 15px;
             color: #666666;
             font-size: .95em;
@@ -189,7 +275,7 @@ body {
             a {
                 color:#666666;
             }
-        }
+        }*/
 
         &:hover {
             transition: .3s;
@@ -198,15 +284,16 @@ body {
                 color: #434343;
             }
 
-            a {
+            a,
+            .title a {
                 color: #6fa8dc;
             }
 
-            .topics {
+            /*.topics {
                 a {
                     background: #6fa8dc;
                 }
-            }
+            }*/
         }
     }
 
@@ -513,6 +600,10 @@ body {
             border: 1px solid #f3f3f3;
             font-size: 1.5em;
             padding: .5em 1%;
+
+            img {
+                max-width: 100%;
+            }
         }
     }
 

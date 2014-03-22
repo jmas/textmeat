@@ -1,22 +1,20 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset="utf-8" />
+    <%- partial('partials/head') %>
     <title><%- title %></title>
-    <meta name="viewport" content="width=device-width, user-scalable=no" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" onerror="this.src='/js/jquery.min.js';"></script>
   </head>
   <body class="normal-page">
 
     <div class="nav">
         <div class="container">
             <ul>
-                <li <%- target.controller === 'user' ? 'class="active"': '' %>><a href="/user/index"><%- sessionUser && sessionUser.name ? user.name: sessionUser && user.email ? user.email: __('I am') %></a></li>
-                <li <%- target.controller === 'text' ? 'class="active"': '' %>><a href="/text/index"><%- __('Texts') %></a></li>
+                <li <%- target.controller === 'user' ? 'class="active"': '' %>><a href="/user/index"><%- sessionUser && sessionUser.name ? user.name: sessionUser && sessionUser.email ? sessionUser.email: __('I am') %></a></li>
+                <li <%- target.controller === 'record' ? 'class="active"': '' %>><a href="/record/index"><%- __('Feed') %></a></li>
                 <li <%- target.controller === 'topic' ? 'class="active"': '' %>><a href="/topic/index"><%- __('Topics') %></a></li>
             </ul>
             <ul class="second">
-                <li><a class="button add-button" href="/text/add">+</a></li>
+                <li><a class="button add-button" href="/record/add">+</a></li>
             </ul>
         </div>
     </div>
