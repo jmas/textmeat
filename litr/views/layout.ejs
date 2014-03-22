@@ -11,9 +11,9 @@
     <div class="nav">
         <div class="container">
             <ul>
-                <li <%- target.controller === 'user' ? 'class="active"': '' %>><a href="/user/index"><%= sessionUser && sessionUser.name ? user.name: sessionUser && user.email ? user.email: 'User' %></a></li>
-                <li <%- target.controller === 'text' ? 'class="active"': '' %>><a href="/text/index">Reading</a></li>
-                <li <%- target.controller === 'topic' ? 'class="active"': '' %>><a href="/topic/index">Topics</a></li>
+                <li <%- target.controller === 'user' ? 'class="active"': '' %>><a href="/user/index"><%- sessionUser && sessionUser.name ? user.name: sessionUser && user.email ? user.email: __('I am') %></a></li>
+                <li <%- target.controller === 'text' ? 'class="active"': '' %>><a href="/text/index"><%- __('Texts') %></a></li>
+                <li <%- target.controller === 'topic' ? 'class="active"': '' %>><a href="/topic/index"><%- __('Topics') %></a></li>
             </ul>
             <ul class="second">
                 <li><a class="button add-button" href="/text/add">+</a></li>
