@@ -69,6 +69,57 @@ body {
     }
 }
 
+.attachment {
+    overflow: hidden;
+    margin-bottom: 15px;
+
+    .image {
+        width: 75px;
+        height: 75px;
+        float: left;
+        margin-right: 15px;
+        margin-top: .1em;
+        background-color: #cfe2f3;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        border-radius: 3px;
+        text-align: center;
+        font-size: 2em;
+        line-height: 75px;
+        text-transform: uppercase;
+        color: #fff;
+    }
+
+    .title {
+        margin-bottom: 5px;
+        color: #434343;
+
+        .shortcut-link {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-image: url(/images/shortcut.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        a {
+            color: #434343;
+        }
+    }
+
+    .text {
+        font-size: .8em;
+        overflow: hidden;
+        line-height: 1.5em;
+        color: #666666;
+    }
+}
+
 .container {
     position: relative;
     max-width: 810px;
@@ -174,6 +225,12 @@ body {
             }*/
         }
 
+        .attachment {
+            a {
+                color: #6fa8dc;
+            }
+        }
+
         .user {
             line-height: 16px;
             font-size: .8em;
@@ -203,51 +260,6 @@ body {
             .summary {
                 font-size: .9em;
                 line-height: 1.5em;
-            }
-        }
-
-        .data-link {
-            overflow: hidden;
-            margin-bottom: 15px;
-
-            .image {
-                width: 75px;
-                height: 75px;
-                float: left;
-                margin-right: 15px;
-                margin-top: .2em;
-                background-color: #cfe2f3;
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center center;
-                border-radius: 3px;
-            }
-
-            .title {
-                margin-bottom: 5px;
-
-                .shortcut-link {
-                    display: inline-block;
-                    width: 10px;
-                    height: 10px;
-                    background-image: url(/images/shortcut.png);
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                    background-position: center center;
-                    margin-left: 5px;
-                    vertical-align: middle;
-                }
-
-                a {
-                    color: #434343;
-                }
-            }
-
-            .text {
-                font-size: .8em;
-                overflow: hidden;
-                line-height: 1.5em;
-                color: #666666;
             }
         }
 
@@ -298,12 +310,28 @@ body {
     }
 
     &:hover {
+        .attachment {
+            .title {
+                a {
+                    color: #434343;
+                }
+            }
+        }
+
         .item {
             opacity: .8;
 
             &:hover {
                 opacity: 1;
+
+                .title {
+                    a {
+                        color: #6fa8dc;
+                    }
+                }
             }
+
+            
         }
     }
 
@@ -573,6 +601,14 @@ body {
 
 .form-container {
     padding: 15px;
+
+    .form-attachment-container {
+        margin-bottom: 30px;
+        border: 1px solid #eee;
+        padding: 15px 15px 0 15px;
+        border-radius: 3px;
+        display: none;
+    }
 }
 
 .large-form {
@@ -592,7 +628,9 @@ body {
             }
 
             textarea {
-                height: 300px;
+                height: 100px;
+                max-width: 100%;
+                min-width: 100%;
             }
         }
 

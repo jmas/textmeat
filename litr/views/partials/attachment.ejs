@@ -1,0 +1,20 @@
+<div class="attachment">
+    <% if (data.imageUrl || data.url) { %>
+    <div class="image" style="background-image:url(<%- data.imageUrl %>);">
+        <%= ! data.imageUrl ? data.url.substr(7, 1): '' %>
+    </div>
+    <% } %>
+    <div class="summary">
+        <div class="title">
+            <% if (data.id) { %>
+            <a href="#"><%- data.title %></a>
+            <% } else { %>
+            <%- data.title %>
+            <% } %>
+            <a class="shortcut-link" href="<%= data.url %>" target="_blank"></a>
+        </div>
+        <div class="text">
+            <%- data.cuttedContent %>
+        </div>
+    </div>
+</div>

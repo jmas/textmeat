@@ -15,8 +15,10 @@
 module.exports = {
 
   attributes: {
-    
     url: 'string',
+    message: {
+      type: 'text'
+    },
     title: {
       type: 'text',
       required: true
@@ -24,8 +26,27 @@ module.exports = {
     content: {
       type: 'text',
       required: true
-    }//,
-    // contentHtml: 'text'
+    },
+    imageUrl: {
+      type: 'string'
+    },
+    cuttedContent: {
+      type: 'string'
+    }
+    // cuttedContent: function() {
+    //   var cuttedContent,
+    //       maxLength = 255;
+
+    //   if (this.content.length > 0) { 
+    //     cuttedContent = this.content.replace(/(<([^>]+)>)/ig, '').substr(0, maxLength);
+
+    //     //re-trim if we are in the middle of a word
+    //     cuttedContent = cuttedContent.substr(0, Math.min(cuttedContent.length, cuttedContent.lastIndexOf(" ")));
+    //     return cuttedContent + '&hellip;';
+    //   } else {
+    //     return '';
+    //   }
+    // }
   }//,
 
   // beforeValidation: function(attrs, next) {

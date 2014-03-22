@@ -1,21 +1,18 @@
 <div class="form-container">
     <form class="large-form" action="<%- apiConfig.recordCreateUrl %>" method="post">
+        <input type="hidden" name="title" data-title-el />
+        <input type="hidden" name="url" data-url-el />
+        <input type="hidden" name="imageUrl" data-image-url-el />
+        <input type="hidden" name="content" data-content-el />
+        <input type="hidden" name="cuttedContent" data-cutted-content-el />
+
         <div class="field">
             <div class="element">
-                <input class="element-input" type="text" placeholder="URL" autofocus name="url" data-url-el />
+                <textarea name="message" placeholder="<%- __('Write thoughts or put URL here') %>" data-message-el></textarea>
             </div>
         </div>
-        <div class="separator"><span>or</span></div>
-        <div class="field">
-            <div class="element">
-                <input class="element-input" type="text" placeholder="Title" name="title" data-title-el />
-            </div>
-        </div>
-        <div class="field">
-            <div class="element">
-                <div class="element-editor" data-content-editor-el></div>
-                <textarea style="display:none;" class="element-textarea" placeholder="Text" name="content" data-content-el></textarea>
-            </div>
+        <div class="form-attachment-container" data-attachment-container-el>
+            
         </div>
         <div class="control">
             <input class="button" type="submit" value="Add" />
@@ -24,48 +21,99 @@
     </form>
 </div>
 
-<link rel="stylesheet" href="/js/jquery-notebook/src/js/jquery.notebook.css" />
-<script src="/js/jquery-notebook/src/js/jquery.notebook.js"></script>
+<!-- <link rel="stylesheet" href="/js/jquery-notebook/src/js/jquery.notebook.css" />
+<script src="/js/jquery-notebook/src/js/jquery.notebook.js"></script>-->
 
 <script>
 
 (function() {
 
-$.fn.notebook.defaults = {
+/*$.fn.notebook.defaults = {
     autoFocus: false,
     placeholder: 'Text',
     mode: 'multiline', // multiline or inline
     modifiers: ['bold', 'italic', 'underline', 'h1', 'h2', 'ol', 'ul', 'anchor']
-};
+};*/
 
-var urlEl = $('[data-url-el]'),
+/*var urlEl = $('[data-url-el]'),
     titleEl = $('[data-title-el]'),
     contentEl = $('[data-content-el]');
-    contentEditorEl = $('[data-content-editor-el]');
+    contentEditorEl = $('[data-content-editor-el]');*/
 
-contentEditorEl.notebook();
+var messageEl = $('[data-message-el]'),
+    attachmentContainerEl = $('[data-attachment-container-el]'),
+    titleEl = $('[data-title-el]'),
+    urlEl = $('[data-url-el]'),
+    imageUrlEl = $('[data-image-url-el]'),
+    contentEl = $('[data-content-el]'),
+    cuttedContentEl = $('[data-cutted-content-el]'),
+    maxLength = 255;
+
+/*contentEditorEl.notebook();*/
 
 // Editor
-contentEditorEl.on('contentChange', function(e) {
+/*contentEditorEl.on('contentChange', function(e) {
   contentEl.val(contentEditorEl.html());
-});
+});*/
 
 // Url
-urlEl.on('change', function() {
-  var url = this.value;
+messageEl.on('change', function() {
+  var text = this.value,
+      matchedUrls,
+      title,
+      url,
+      content,
+      trimmedString,
+      imageUrl,
+      matchedImagesUrls,
+      cuttedContent;
 
-  $.get(window.api.config.recordParseUrl + '?url='+url).done(function(data) {
-    if (! data.error) {
-      if (data.title) {
-        titleEl.val(data.title);
-      }
+  matchedUrls = text.match(/(\b((https?|ftp|file):\/\/)?[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig);
 
-      if (data.contents) {
-        contentEl.val(data.contents);
-        contentEditorEl.html(data.contents);
+  if (matchedUrls) {
+    url = matchedUrls[0];
+
+    $.get(window.api.config.recordFetchUrl + '?url='+url).done(function(data) {
+      if (! data.error) {
+        title = data.title;
+        content = data.contents;
+
+        if (content.length > 0) {
+          
+          matchedImagesUrls = content.match(/<img [^>]*src="([^>"]+\/([^>"]+))"[^>]*?>/i);
+          
+          cuttedContent = content.replace(/(<([^>]+)>)/ig, '');
+          cuttedContent = cuttedContent.substr(0, maxLength);
+
+          //re-trim if we are in the middle of a word
+          cuttedContent = cuttedContent.substr(0, Math.min(cuttedContent.length, cuttedContent.lastIndexOf(" ")));
+          cuttedContent = cuttedContent + '&hellip;';
+          
+          if (matchedImagesUrls) {
+            imageUrl = matchedImagesUrls[1];
+          }
+        }
+
+        $.post(window.api.config.recordAttrchmentHtmlUrl, {
+          title: title,
+          cuttedContent: cuttedContent,
+          imageUrl: imageUrl,
+          url: url
+        }).done(function(data) {
+          if (! data.error) {
+            attachmentContainerEl.html(data);
+            attachmentContainerEl.show();
+            
+            titleEl.val(title);
+            urlEl.val(url);
+            contentEl.val(content);
+            cuttedContentEl.val(cuttedContent);
+            imageUrlEl.val(imageUrl);
+          }
+        });
       }
-    }
-  });
+    });
+  }
 });
 
 })();

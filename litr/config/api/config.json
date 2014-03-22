@@ -1,8 +1,10 @@
 {
 	"recordIndexUrl": "/record/index",
 	"recordViewUrl": "/record/view",
-	"recordParseUrl": "/record/parse",
+	"recordFetchUrl": "/record/fetch",
 	"recordCreateUrl": "/record/create",
+	"recordAttrchmentHtmlUrl": "/record/attachmentHtml",
 	"userIndexUrl": "/user/index",
-	"userViewUrl": "/user/view"
+	"userViewUrl": "/user/view",
+	"recordGenerateUrlImageUrl": "/record/generateUrlImage"
 }
