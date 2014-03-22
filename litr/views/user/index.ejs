@@ -1,27 +1,27 @@
 <div class="user-summary">
     <div class="image" style="background-image:url(http://www.gravatar.com/avatar/<%= user ? user.emailMd5(): '' %>?d=mm);"></div>
-    <div class="name"><%= user && user.name ? user.name: user ? user.email: 'User' %></div>
+    <div class="name"><%= user && user.name ? user.name: user ? user.email: __('I am') %></div>
     <div class="summary"><%= user && user.about ? user.about: '' %></div>
     <div class="meta">
         <div class="stat">
             <div class="item">
-                <div class="title">Texts</div>
+                <div class="title"><%- __('My Texts') %></div>
                 <div class="count"><%= user && user.textsCount ? user.textsCount: 0 %></div>
             </div>
             <div class="item">
-                <div class="title">Readers</div>
+                <div class="title"><%- __('My Readers') %></div>
                 <div class="count"><%= user && user.readersCount ? user.readersCount: 0 %></div>
             </div>
             <div class="item">
-                <div class="title">Reading</div>
+                <div class="title"><%- __('I reading') %></div>
                 <div class="count"><%= user && user.readingCount ? user.readingCount: 0 %></div>
             </div>
         </div>
         <div class="control">
             <!-- <a class="button trust-button" href="#">Reading</a> -->
             <!-- <a class="button" href="#">Read</a> -->
-            <a class="button simple-button" href="/user/setting">Settings</a>
-            <a class="button simple-button" href="/user/logout">Logout</a>
+            <a class="button simple-button" href="/user/setting"><%- __('Settings') %></a>
+            <a class="button simple-button" href="/user/logout"><%- __('Logout') %></a>
         </div>
     </div>
 </div>
