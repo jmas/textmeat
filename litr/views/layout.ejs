@@ -9,7 +9,7 @@
     <div class="nav">
         <div class="container">
             <ul>
-                <li <%- target.controller === 'user' ? 'class="active"': '' %>><a href="/user/index"><%- sessionUser && sessionUser.name ? user.name: sessionUser && sessionUser.email ? sessionUser.email: __('I am') %></a></li>
+                <li <%- target.controller === 'user' ? 'class="active"': '' %>><a href="/user/index"><%- sessionUser ? normalizeUserName(sessionUser): __('I am') %></a></li>
                 <li <%- target.controller === 'record' ? 'class="active"': '' %>><a href="/record/index"><%- __('Feed') %></a></li>
                 <li <%- target.controller === 'topic' ? 'class="active"': '' %>><a href="/topic/index"><%- __('Topics') %></a></li>
             </ul>

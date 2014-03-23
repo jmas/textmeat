@@ -15,17 +15,42 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
+var util = require("util");
+
+var actionView = function(req, res) {
+  var id = req.query.id || req.session.user;
+
+  if (! id) {
+    return res.json({ error: 'user not exists' }, 404);
+  }
+
+  User.findOne({ id: id })
+    //.populate('records', { '$sort': {createdAt: -1} })
+    // .sort({'records.createdAt': -1})
+    .exec(function(err, user) {
+      if (err) return res.json({ error: 'DB error' }, 500);
+
+      Record.find()
+        .where({ user: id })
+        .populate('user')
+        .sort({'createdAt': -1})
+        .exec(function(err, items) {
+          console.log('err: ', JSON.stringify(err), items);
+
+          if (err) return res.json({ error: 'DB error' }, 500);
+
+          return res.view({
+            user: user,
+            records: items
+          });
+        });
+    });
+};
+
 module.exports = {
   
-  index: function(req, res) {
-    User.findOne({ id: req.session.user }, function(err, user) {
-      if (err) return res.json({ error: 'DB error' }, 500);
-      
-      return res.view({
-        user: user
-      });
-    });
-  },
+  index: actionView,
+  view: actionView,
   
   login: function (req, res) {
     var bcrypt = require('bcrypt');
@@ -50,6 +75,16 @@ module.exports = {
       } else {
         return res.json({ error: 'User not found' }, 404);
       }
+    });
+  },
+
+  create: function(req, res) {
+    User.create(req.query, function(err, user) {
+      console.log(JSON.stringify(err));
+
+      if (err) return res.json({ error: err.toString() }, 500);
+
+      return res.json(user);
     });
   },
 

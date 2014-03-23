@@ -15,6 +15,10 @@
 module.exports = {
 
   attributes: {
+    user: {
+      model: 'user'
+    },
+
     url: 'string',
     message: {
       type: 'text'

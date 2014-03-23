@@ -18,13 +18,16 @@
 module.exports = {
 
   index: function(req, res) {
-    Record.find().sort({'createdAt': -1}).exec(function(err, models) {
-      if (err) return res.json({ error: err.toString() }, 500);
+    Record.find()
+      .sort({'createdAt': -1})
+      .populate('user')
+      .exec(function(err, models) {
+        if (err) return res.json({ error: err.toString() }, 500);
 
-      return res.view({
-        texts: models
+        return res.view({
+          items: models
+        });
       });
-    });
   },
     
   add: function(req, res) {
@@ -34,10 +37,23 @@ module.exports = {
   },
 
   create: function(req, res) {
-    Record.create(req.body, function(err, model) {
-      if (err) return res.json({ error: err.toString() }, 500);
+    if (! req.session.user) {
+      return res.json({ error: 'user not logged in' }, 500);
+    }
 
-      return res.json(model);
+    User.findOne(req.session.user).exec(function(err, user) {
+      if (err) return res.json({ error: 'DB error' }, 500);
+      
+      Record.create(req.body, function(err, model) {
+        if (err) return res.json({ error: err.toString() }, 500);
+
+        user.records.add(model.id);
+        user.save(function(err) {
+          console.log(err);
+        });
+
+        return res.json(model);
+      });
     });
   },
 

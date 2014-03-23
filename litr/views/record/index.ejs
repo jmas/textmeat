@@ -1,23 +1,5 @@
 <div class="text-container">
     <div class="feed-list">
-        <% _.each(texts, function (model) { %>
-        <div class="item">
-            <div class="user">
-                <span class="image" style="background-image:url(http://www.gravatar.com/avatar/<%= sessionUser ? sessionUser.emailMd5(): '' %>?d=mm&1);"></span>
-                <span class="name"><a href="<%- apiConfig.userViewUrl %>">Maslakov Alexander</a></span>
-            </div>
-            <div class="record">
-                <% if (model.message) { %>
-                <div class="summary">
-                    <%- model.message %>
-                </div>
-                <% } %>
-            </div>
-            <%- partial('../partials/attachment', { data: model }) %>
-            <div class="meta">
-                <span class="date">20 April</span>
-            </div>
-        </div>
-        <% }) %>
+        <%- partial('../partials/record_items', { items: items }) %>
     </div>
 </div>

@@ -1,0 +1,33 @@
+<div class="user-summary">
+    <div class="image" style="background-image:url(http://www.gravatar.com/avatar/<%= user ? toMd5(user.email): '' %>?d=mm);"></div>
+    <div class="name"><%= user ? normalizeUserName(user) : __('I am') %></div>
+    <div class="summary"><%= user && user.about ? user.about: '' %></div>
+    <div class="meta">
+        <div class="stat">
+            <div class="item">
+                <div class="title"><%- __('My Records') %></div>
+                <div class="count"><%= user && user.recordsCount ? user.recordsCount: 0 %></div>
+            </div>
+            <div class="item">
+                <div class="title"><%- __('My Readers') %></div>
+                <div class="count"><%= user && user.readersCount ? user.readersCount: 0 %></div>
+            </div>
+            <div class="item">
+                <div class="title"><%- __('I reading') %></div>
+                <div class="count"><%= user && user.readingCount ? user.readingCount: 0 %></div>
+            </div>
+        </div>
+        <div class="control">
+            <!-- <a class="button trust-button" href="#">Reading</a> -->
+            <!-- <a class="button" href="#">Read</a> -->
+            <a class="button simple-button" href="/user/setting"><%- __('Settings') %></a>
+            <a class="button simple-button" href="/user/logout"><%- __('Logout') %></a>
+        </div>
+    </div>
+</div>
+
+<div class="text-container">
+    <div class="feed-list">
+        <%- partial('../partials/record_items', { items: records }) %>
+    </div>
+</div>

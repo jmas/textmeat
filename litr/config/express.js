@@ -16,6 +16,27 @@ module.exports.express = {
         app.use(function(req, res, next) {
           res.locals.sessionUser = null;
 
+          res.locals.toMd5 = function(str) {
+            var crypto = require('crypto');
+            return crypto.createHash('md5').update(str).digest('hex');
+          };
+
+          res.locals.normalizeUserName = function(attrs) {
+            if (attrs.name) {
+              return attrs.name;
+            } else if (attrs.email) {
+              return attrs.email.replace(/@.+/, '');
+            }
+
+            return 'Unnamed';
+          };
+
+          res.locals.toHumanDate = function(date) {
+            var moment = require('moment');
+
+            return moment(date);
+          };
+
           if (req.session.user) {
               User.findOne({ id: req.session.user }, function(err, user) {
                 if (err) res.json({ error: 'DB error' }, 500);

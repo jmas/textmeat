@@ -9,6 +9,12 @@
 module.exports = {
 
   attributes: {
+
+    // associations
+    records: {
+      collection: 'record',
+      via: 'user'
+    },
     
     // fields
     name: {
@@ -25,7 +31,7 @@ module.exports = {
       required: true,
       minLength: 6
     },
-    textsCount: {
+    recordsCount: {
       type: 'integer',
       defaultsTo: '0'
     },
@@ -40,11 +46,6 @@ module.exports = {
     about: {
       type: 'string',
       defaultsTo: 'Few words about me.'
-    },
-
-    // associations
-    texts: {
-      collection: 'Text'
     },
 
     emailMd5: function() {
