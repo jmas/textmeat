@@ -70,42 +70,43 @@ module.exports = {
     url = req.query.url;
     cleanedHtml = '';
 
-    readability.read(url, function(err, doc) {
-        if (err) return res.json({ error: err.toString() }, 500);
+    readability(url, function(err, doc) {
+      console.log('err: ', JSON.stringify(err));
+      if (err) return res.json({ error: err.toString() }, 500);
 
-        cleanedHtml = doc.getContent();
+      cleanedHtml = doc.getContent();
 
-        if (cleanedHtml) {
-          cleanedHtml = sanitizeHtml(cleanedHtml, {
-            allowedTags: [ 'h3', 'h4', 'h5', 'h6', 'blockquote',
-            'p', 'a', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong',
-            'em', 'strike', 'code', 'hr', 'br', 'img',
-            'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td',
-            'pre' ],
-            allowedAttributes: {
-              a: [ 'href', 'name', 'target' ],
-              // We don't currently allow img itself by default, but this
-              // would make sense if we did
-              img: [ 'src' ]
-            },
-            // Lots of these won't come up by default because
-            // we don't allow them
-            selfClosing: [ 'img', 'br', 'hr', 'area', 'base',
-              'basefont', 'input', 'link', 'meta' ]
-          }).trim();
+      if (cleanedHtml) {
+        cleanedHtml = sanitizeHtml(cleanedHtml, {
+          allowedTags: [ 'h3', 'h4', 'h5', 'h6', 'blockquote',
+          'p', 'a', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong',
+          'em', 'strike', 'code', 'hr', 'br', 'img',
+          'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td',
+          'pre' ],
+          allowedAttributes: {
+            a: [ 'href', 'name', 'target' ],
+            // We don't currently allow img itself by default, but this
+            // would make sense if we did
+            img: [ 'src' ]
+          },
+          // Lots of these won't come up by default because
+          // we don't allow them
+          selfClosing: [ 'img', 'br', 'hr', 'area', 'base',
+            'basefont', 'input', 'link', 'meta' ]
+        }).trim();
 
-          cleanedHtml = cleanedHtml.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/ig, "\n");
-        }
+        cleanedHtml = cleanedHtml.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/ig, "\n");
+      }
 
-        // cleanedHtml = htmlToMd(cleanedHtml);
+      // cleanedHtml = htmlToMd(cleanedHtml);
 
-        obj = {
-            'url': url,
-            'title': doc.getTitle().trim(),
-            'contents': cleanedHtml
-        };
+      obj = {
+          'url': url,
+          'title': doc.getTitle().trim(),
+          'contents': cleanedHtml
+      };
 
-        res.json(obj);
+      res.json(obj);
     });
   },
 
@@ -121,41 +122,43 @@ module.exports = {
     url = req.query.url;
     cleanedHtml = '';
 
-    readability.read(url, function(err, doc) {
-        if (err) return res.json({ error: err.toString() }, 500);
+    readability(url, function(err, doc) {
+      console.log('err: ', err);
 
-        cleanedHtml = doc.getContent();
+      if (err) return res.json({ error: err.toString() }, 500);
 
-        if (cleanedHtml) {
-          cleanedHtml = sanitizeHtml(cleanedHtml, {
-            allowedTags: [ 'h3', 'h4', 'h5', 'h6', 'blockquote',
-            'p', 'a', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong',
-            'em', 'strike', 'code', 'hr', 'br', 'img',
-            'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td',
-            'pre' ],
-            allowedAttributes: {
-              a: [ 'href', 'name', 'target' ],
-              // We don't currently allow img itself by default, but this
-              // would make sense if we did
-              img: [ 'src' ]
-            },
-            // Lots of these won't come up by default because
-            // we don't allow them
-            selfClosing: [ 'img', 'br', 'hr', 'area', 'base',
-              'basefont', 'input', 'link', 'meta' ]
-          }).trim();
+      cleanedHtml = doc.getContent();
 
-          cleanedHtml = cleanedHtml.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/ig, "\n");
-        }
+      if (cleanedHtml) {
+        cleanedHtml = sanitizeHtml(cleanedHtml, {
+          allowedTags: [ 'h3', 'h4', 'h5', 'h6', 'blockquote',
+          'p', 'a', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong',
+          'em', 'strike', 'code', 'hr', 'br', 'img',
+          'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td',
+          'pre' ],
+          allowedAttributes: {
+            a: [ 'href', 'name', 'target' ],
+            // We don't currently allow img itself by default, but this
+            // would make sense if we did
+            img: [ 'src' ]
+          },
+          // Lots of these won't come up by default because
+          // we don't allow them
+          selfClosing: [ 'img', 'br', 'hr', 'area', 'base',
+            'basefont', 'input', 'link', 'meta' ]
+        }).trim();
 
-        obj = {
-            'url': url,
-            'title': doc.getTitle().trim(),
-            'contents': cleanedHtml,
-            'imageUrl': null
-        };
+        cleanedHtml = cleanedHtml.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/ig, "\n");
+      }
 
-        res.json(obj);
+      obj = {
+          'url': url,
+          'title': doc.getTitle().trim(),
+          'contents': cleanedHtml,
+          'imageUrl': null
+      };
+
+      res.json(obj);
     });
   },
 

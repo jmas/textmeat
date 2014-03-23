@@ -7,11 +7,11 @@
     <div class="summary">
         <div class="title">
             <% if (data.id) { %>
-            <a href="#"><%- data.title %></a>
+            <a href="<%- apiConfig.recordViewUrl %>?id=<%= data.id %>"><%- data.title %></a>
             <% } else { %>
             <%- data.title %>
             <% } %>
-            <a class="shortcut-link" href="<%= data.url %>" target="_blank"></a>
+            <a class="shortcut-link" href="<%= data.url %>" target="_blank" title="<%= data.url %>"></a>
         </div>
         <div class="text">
             <%- data.cuttedContent %>

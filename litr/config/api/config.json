@@ -6,5 +6,8 @@
 	"recordAttrchmentHtmlUrl": "/record/attachmentHtml",
 	"userIndexUrl": "/user/index",
 	"userViewUrl": "/user/view",
-	"recordGenerateUrlImageUrl": "/record/generateUrlImage"
+	"userReadUrl": "/user/read",
+	"userUnreadUrl": "/user/unread",
+	"recordGenerateUrlImageUrl": "/record/generateUrlImage",
+	"topicViewUrl": "/topic/view"
 }

@@ -15,6 +15,19 @@ module.exports = {
       collection: 'record',
       via: 'user'
     },
+    readers: {
+      collection: 'user',
+      via: 'reading',
+      dominant: true
+    },
+    reading: {
+      collection: 'user',
+      via: 'readers'
+    },
+    readingTopics: {
+      collection: 'topic',
+      via: 'readers'
+    },
     
     // fields
     name: {

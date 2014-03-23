@@ -18,10 +18,14 @@
             </div>
         </div>
         <div class="control">
-            <!-- <a class="button trust-button" href="#">Reading</a> -->
-            <!-- <a class="button" href="#">Read</a> -->
+        <% if (sessionUser && sessionUser.id == user.id) { %>
             <a class="button simple-button" href="/user/setting"><%- __('Settings') %></a>
             <a class="button simple-button" href="/user/logout"><%- __('Logout') %></a>
+        <% } else if (isRead) { %>
+            <a class="button trust-button" href="<%- apiConfig.userUnreadUrl %>?id=<%- user.id %>">Reading</a>
+        <% } else { %>
+            <a class="button" href="<%- apiConfig.userReadUrl %>?id=<%- user.id %>">Read</a>
+        <% } %>
         </div>
     </div>
 </div>

@@ -1,0 +1,19 @@
+<div class="topic-container">
+    <div class="topic-list">
+        <% _.each(items, function(item) { %>
+        <div class="item">
+            <div class="inside">
+                <div class="title">
+                    <a href="<%- apiConfig.topicViewUrl %>?topicId=<%- item.id %>"><%= item.name %></a>
+                </div>
+                <div class="readers-count">
+                    100 readers
+                </div>
+                <div class="control">
+                    <a class="button trust-button" href="#topic/unread/JavaScript">Reading</a>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+</div>
