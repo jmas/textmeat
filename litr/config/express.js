@@ -22,10 +22,18 @@ module.exports.express = {
           };
 
           res.locals.normalizeUserName = function(attrs) {
+            var email;
+
             if (attrs.name) {
               return attrs.name;
             } else if (attrs.email) {
-              return attrs.email.replace(/@.+/, '');
+              email = attrs.email
+                .replace(/@.+/, '')
+                .replace(/[^A-Za-z]/, ' ').replace(/\w\S*/g, function(txt){
+                  return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                });
+
+              return email;
             }
 
             return 'Unnamed';
