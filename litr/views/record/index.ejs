@@ -5,6 +5,12 @@
     </div>
 </div>
 <% } else { %>
-<p><%- __('Click &laquo;Read&raquo; button on topic or writer to show records.') %></p>
-<p><a class="button" href="<%- apiConfig.topicIndexUrl %>"><%- __('Go to Topics') %></a></p>
+<div class="empty-message">
+	<div class="text">
+		<p><%- __('Click &laquo;Read&raquo; button on topic or writer to show records.') %></p>
+	</div>
+	<div class="buttons">
+		<p><a class="button" href="<%- apiConfig.topicIndexUrl %>"><%- __('Go to Topics') %></a></p>
+	</div>
+</div>
 <% } %>
