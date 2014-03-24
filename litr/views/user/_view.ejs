@@ -5,15 +5,27 @@
     <div class="meta">
         <div class="stat">
             <div class="item">
+                <% if (sessionUser && sessionUser.id == user.id) { %>
                 <div class="title"><%- __('My Records') %></div>
+                <% } else { %>
+                <div class="title"><%- __('Records') %></div>
+                <% } %>
                 <div class="count"><%= user && user.recordsCount ? user.recordsCount: 0 %></div>
             </div>
             <div class="item">
+                <% if (sessionUser && sessionUser.id == user.id) { %>
                 <div class="title"><%- __('My Readers') %></div>
+                <% } else { %>
+                <div class="title"><%- __('Readers') %></div>
+                <% } %>
                 <div class="count"><%= user && user.readersCount ? user.readersCount: 0 %></div>
             </div>
             <div class="item">
+                <% if (sessionUser && sessionUser.id == user.id) { %>
                 <div class="title"><%- __('I reading') %></div>
+                <% } else { %>
+                <div class="title"><%- __('Reads') %></div>
+                <% } %>
                 <div class="count"><%= user && user.readingCount ? user.readingCount: 0 %></div>
             </div>
         </div>
@@ -22,9 +34,9 @@
             <a class="button simple-button" href="/user/setting"><%- __('Settings') %></a>
             <a class="button simple-button" href="/user/logout"><%- __('Logout') %></a>
         <% } else if (isRead) { %>
-            <a class="button trust-button" href="<%- apiConfig.userUnreadUrl %>?id=<%- user.id %>">Reading</a>
+            <a class="button trust-button" href="<%- apiConfig.userUnreadUrl %>?id=<%- user.id %>"><%- __('Reading') %></a>
         <% } else { %>
-            <a class="button" href="<%- apiConfig.userReadUrl %>?id=<%- user.id %>">Read</a>
+            <a class="button" href="<%- apiConfig.userReadUrl %>?id=<%- user.id %>"><%- __('Read') %></a>
         <% } %>
         </div>
     </div>

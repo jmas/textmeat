@@ -18,15 +18,35 @@
 module.exports = {
 
   index: function(req, res) {
-    Record.find()
-      .sort({'createdAt': -1})
-      .populate('user')
-      .exec(function(err, models) {
-        if (err) return res.json({ error: err.toString() }, 500);
+    var reading = [];
 
-        return res.view({
-          items: models
+    if (! req.session.user) {
+      return res.json({ error: 'user not logged in' }, 500);
+    }
+
+    User.findOne(req.session.user)
+      .populate('reading')
+      .exec(function(err, user) {
+        console.log('error: ', err);
+        if (err) return res.json({ error: 'DB error' }, 500);
+
+        _.each(user.reading, function(item) {
+          reading.push(item.id)
         });
+
+        console.log(reading);
+
+        Record.find()
+          .where({ user: {'$in': reading} })
+          .sort({'createdAt': -1})
+          .populate('user')
+          .exec(function(err, models) {
+            if (err) return res.json({ error: err.toString() }, 500);
+
+            return res.view({
+              items: models
+            });
+          });
       });
   },
     
@@ -41,20 +61,23 @@ module.exports = {
       return res.json({ error: 'user not logged in' }, 500);
     }
 
-    User.findOne(req.session.user).exec(function(err, user) {
-      if (err) return res.json({ error: 'DB error' }, 500);
-      
-      Record.create(req.body, function(err, model) {
-        if (err) return res.json({ error: err.toString() }, 500);
+    User.findOne(req.session.user)
+      .exec(function(err, user) {
+        if (err) return res.json({ error: 'DB error' }, 500);
+        
+        Record.create(req.body, function(err, model) {
+          if (err) return res.json({ error: err.toString() }, 500);
 
-        user.records.add(model.id);
-        user.save(function(err) {
-          console.log(err);
+          user.records.add(model.id);
+          user.recordsCount = user.recordsCount + 1;
+
+          user.save(function(err) {
+            console.log(err);
+          });
+
+          return res.json(model);
         });
-
-        return res.json(model);
       });
-    });
   },
 
   parse: function(req, res) {

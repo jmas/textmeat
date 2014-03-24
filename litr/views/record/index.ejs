@@ -1,5 +1,10 @@
+<% if (items.length > 0) { %>
 <div class="text-container">
     <div class="feed-list">
         <%- partial('../partials/record_items', { items: items }) %>
     </div>
 </div>
+<% } else { %>
+<%- __('Click Read button on topic or writer to show records.') %>
+<a href="<%- apiConfig.topicIndexUrl %>"><%- __('Go to Topics') %></a>
+<% } %>

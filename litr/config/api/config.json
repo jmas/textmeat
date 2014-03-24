@@ -8,6 +8,6 @@
 	"userViewUrl": "/user/view",
 	"userReadUrl": "/user/read",
 	"userUnreadUrl": "/user/unread",
-	"recordGenerateUrlImageUrl": "/record/generateUrlImage",
+	"topicIndexUrl": "/topic/index",
 	"topicViewUrl": "/topic/view"
 }
