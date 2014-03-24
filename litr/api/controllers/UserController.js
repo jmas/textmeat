@@ -24,6 +24,12 @@ var actionView = function(req, res) {
     return res.json({ error: 'user not exists' }, 404);
   }
 
+  console.log(req.options.action, id, req.session.user);
+
+  if (req.options.action == 'view' && id == req.session.user) {
+    res.redirect(res.locals.apiConfig.userIndexUrl);
+  }
+
   function render(user, items, isRead) {
     return res.view({
       user: user,
