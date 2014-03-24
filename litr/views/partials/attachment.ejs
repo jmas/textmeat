@@ -6,12 +6,13 @@
     <% } %>
     <div class="summary">
         <div class="title">
-            <% if (data.id) { %>
-            <a href="<%- apiConfig.recordViewUrl %>?id=<%= data.id %>"><%- data.title %></a>
-            <% } else { %>
-            <%- data.title %>
-            <% } %>
-            <a class="shortcut-link" href="<%= data.url %>" target="_blank" title="<%= data.url %>"></a>
+            <span class="inside">
+                <% if (data.id) { %>
+                <a class="link" href="<%- apiConfig.recordViewUrl %>?id=<%= data.id %>" data-link="<%= data.url %>"><%- data.title %></a>
+                <% } else { %>
+                <%- data.title %><% } %>
+                <a class="shortcut-link" href="<%= data.url %>" target="_blank" data-title="<%= data.url %>"></a>
+            </span>
         </div>
         <div class="text">
             <%- data.cuttedContent %>
