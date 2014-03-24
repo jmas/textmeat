@@ -1,11 +1,11 @@
 <div class="topic-summary">
-    <div class="name">JavaScript</div>
-    <div class="summary">Few lines of text about me.</div>
+    <div class="name"><%= model.name %></div>
+    <div class="summary"><%= model.description ? model.description: '' %></div>
     <div class="meta">
         <div class="stat">
             <div class="item">
                 <div class="title">Readers</div>
-                <div class="count">100</div>
+                <div class="count"><%- model.readersCount ? model.readersCount: '0' %></div>
             </div>
         </div>
         <div class="control">

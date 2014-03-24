@@ -29,9 +29,20 @@ module.exports = {
   },
 
   view: function(req, res) {
-    return res.view({
-      //items: items
-    });
+    if (! req.query.id) {
+      return res.json({ error: 'param id is required' }, 500);
+    }
+
+    var id = req.query.id;
+
+    Topic.findOne(id)
+      .exec(function(err, model) {
+        if (err) return res.json({ error: err.toString() }, 500);
+
+        return res.view({
+          model: model
+        });
+      });
   },
 
   /**
