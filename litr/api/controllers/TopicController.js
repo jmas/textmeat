@@ -18,13 +18,34 @@
 module.exports = {
     
   index: function(req, res) {
-    Topic.find()
-      .exec(function(err, items) {
+    var readingTopics = [];
+
+    if (!req.session.user) {
+      return res.json({ error: 'user is not logged in' }, 500);
+    }
+    
+    User.findOne(req.session.user)
+      .populate('readingTopics')
+      .exec(function(err, user) {
         if (err) return res.json({ error: err.toString() }, 500);
 
-        return res.view({
-          items: items
-        });
+        console.log('RT:', user);
+
+        if (user.readingTopics) {
+          _.each(user.readingTopics, function(item) {
+            readingTopics.push(item.id);
+          });
+        }
+
+        Topic.find()
+          .exec(function(err, items) {
+            if (err) return res.json({ error: err.toString() }, 500);
+
+            return res.view({
+              items: items,
+              readingTopics: readingTopics
+            });
+          });
       });
   },
 
@@ -42,6 +63,78 @@ module.exports = {
         return res.view({
           model: model
         });
+      });
+  },
+
+  read: function(req, res) {
+    if (!req.query.id) {
+      return res.json({ error: 'param id is requred' }, 500);
+    }
+
+    var id = req.query.id;
+
+    if (!req.session.user) {
+      return res.json({ error: 'user is not logged in' }, 500);
+    }
+
+    User.findOne(req.session.user)
+      .populate('reading')
+      .exec(function(err, user) {
+        if (err) return res.json({ error: err.toString() }, 500);
+
+        Topic.findOne(id)
+          .populate('readers')
+          .exec(function(err, topic) {
+            if (err) return res.json({ error: err.toString() }, 500);
+
+            user.readingTopics.add(id);
+            user.readingCount = user.readingTopics.length + 1;
+            topic.readersCount = topic.readers.length + 1;
+
+            user.save(function(err, model) {
+              if (err) return res.json({ error: err.toString() }, 500);
+
+              topic.save(function(err, topic) {
+                return res.json(model);
+              });
+            });
+          });
+      });
+  },
+
+  unread: function(req, res) {
+    if (!req.query.id) {
+      return res.json({ error: 'param id is requred' }, 500);
+    }
+
+    var id = req.query.id;
+
+    if (!req.session.user) {
+      return res.json({ error: 'user is not logged in' }, 500);
+    }
+
+    User.findOne(req.session.user)
+      .populate('reading')
+      .exec(function(err, user) {
+        if (err) return res.json({ error: err.toString() }, 500);
+
+        Topic.findOne(id)
+          .populate('readers')
+          .exec(function(err, topic) {
+            if (err) return res.json({ error: err.toString() }, 500);
+
+            user.readingTopics.remove(id);
+            user.readingCount = user.readingTopics.length - 1;
+            topic.readersCount = topic.readers.length - 1;
+
+            user.save(function(err, model) {
+              if (err) return res.json({ error: err.toString() }, 500);
+
+              topic.save(function(err, topic) {
+                return res.json(model);
+              });
+            });
+          });
       });
   },
 

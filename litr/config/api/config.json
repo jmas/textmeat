@@ -9,5 +9,7 @@
 	"userReadUrl": "/user/read",
 	"userUnreadUrl": "/user/unread",
 	"topicIndexUrl": "/topic/index",
-	"topicViewUrl": "/topic/view"
+	"topicViewUrl": "/topic/view",
+	"topicReadUrl": "/topic/read",
+	"topicUnreadUrl": "/topic/unread"
 }

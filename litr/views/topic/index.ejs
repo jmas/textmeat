@@ -10,7 +10,11 @@
                     100 readers
                 </div>
                 <div class="control">
-                    <a class="button trust-button" href="#topic/unread/JavaScript"><%- __('Reading') %></a>
+                <% if (readingTopics.indexOf(item.id) >= 0) { %>
+                    <a class="button trust-button" href="<%- apiConfig.topicUnreadUrl %>?id=<%- item.id %>"><%- __('Reading') %></a>
+                <% } else { %>
+                    <a class="button" href="<%- apiConfig.topicReadUrl %>?id=<%- item.id %>"><%- __('Read') %></a>
+                <% } %>
                 </div>
             </div>
         </div>
