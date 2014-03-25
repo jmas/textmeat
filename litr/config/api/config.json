@@ -2,6 +2,7 @@
 	"recordIndexUrl": "/record/index",
 	"recordViewUrl": "/record/view",
 	"recordFetchUrl": "/record/fetch",
+	"recordAddUrl": "/record/add",
 	"recordCreateUrl": "/record/create",
 	"recordAttrchmentHtmlUrl": "/record/attachmentHtml",
 	"userIndexUrl": "/user/index",

@@ -1,4 +1,4 @@
-<div class="form-container">
+<div class="form-container" data-form-container-el>
     <form class="large-form" action="<%- apiConfig.recordCreateUrl %>" method="post">
         <input type="hidden" name="title" data-title-el />
         <input type="hidden" name="url" data-url-el />
@@ -11,9 +11,7 @@
                 <textarea name="message" placeholder="<%- __('Write thoughts or put URL here') %>" data-message-el></textarea>
             </div>
         </div>
-        <div class="form-attachment-container" data-attachment-container-el>
-            
-        </div>
+        <div class="form-attachment-container" data-attachment-container-el></div>
         <div class="control">
             <input class="button" type="submit" value="Add" />
             <a class="button simple-button" href="<%- apiConfig.recordIndexUrl %>">Cancel</a>
@@ -40,14 +38,17 @@
     contentEl = $('[data-content-el]');
     contentEditorEl = $('[data-content-editor-el]');*/
 
-var messageEl = $('[data-message-el]'),
-    attachmentContainerEl = $('[data-attachment-container-el]'),
-    titleEl = $('[data-title-el]'),
-    urlEl = $('[data-url-el]'),
-    imageUrlEl = $('[data-image-url-el]'),
-    contentEl = $('[data-content-el]'),
-    cuttedContentEl = $('[data-cutted-content-el]'),
+var containerEl = $('[data-form-container-el]'),
+    messageEl = containerEl.find('[data-message-el]'),
+    attachmentContainerEl = containerEl.find('[data-attachment-container-el]'),
+    titleEl = containerEl.find('[data-title-el]'),
+    urlEl = containerEl.find('[data-url-el]'),
+    imageUrlEl = containerEl.find('[data-image-url-el]'),
+    contentEl = containerEl.find('[data-content-el]'),
+    cuttedContentEl = containerEl.find('[data-cutted-content-el]'),
     maxLength = 255;
+
+console.log(titleEl);
 
 /*contentEditorEl.notebook();*/
 

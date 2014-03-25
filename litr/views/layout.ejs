@@ -37,5 +37,16 @@
 
 <!--TEMPLATES END-->
 
+<script>
+$.get(window.api.config.recordAddUrl + '?lite=1').done(function(html) {
+  $(html)
+    
+    .dialogOpen({
+      width: 500,
+      height: 300
+    });
+});
+</script>
+
   </body>
 </html>

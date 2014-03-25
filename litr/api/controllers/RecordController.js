@@ -52,7 +52,7 @@ module.exports = {
     
   add: function(req, res) {
     return res.view({
-        layout: 'simple_layout'
+        layout: req.query.lite ? null: 'simple_layout'
     });
   },
 

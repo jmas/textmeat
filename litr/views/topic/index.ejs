@@ -7,7 +7,7 @@
                     <a href="<%- apiConfig.topicViewUrl %>?id=<%- item.id %>"><%= item.name %></a>
                 </div>
                 <div class="readers-count">
-                    100 readers
+                    <%- __('%s readers', item.readersCount || '0') %>
                 </div>
                 <div class="control">
                 <% if (readingTopics.indexOf(item.id) >= 0) { %>
