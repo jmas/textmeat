@@ -61,7 +61,10 @@ $.fn.openDialog = function(opt) {
 		});
 
 	containerEl.show();
-
+	setTimeout(function() {
+		containerEl.addClass('show');
+	}, 1);
+	
 	$.fn.showMask();
 
 	opt.onOpen instanceof Function && opt.onOpen();
@@ -75,6 +78,7 @@ $.fn.closeDialog = function() {
 	contentEl.html('');
 	titleTextEl.text('');
 
+	containerEl.removeClass('show');
 	containerEl.hide();
 };
 

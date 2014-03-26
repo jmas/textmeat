@@ -23,6 +23,10 @@ $.fn.showMask = function(opt) {
 
 	containerEl.show();
 
+	setTimeout(function() {
+		containerEl.addClass('show');
+	}, 1);
+
 	opt.onOpen instanceof Function && opt.onOpen();
 };
 
@@ -31,6 +35,7 @@ $.fn.hideMask = function(opt) {
 
 	opt.onHide instanceof Function && opt.onHide();
 
+	containerEl.removeClass('show');
 	containerEl.hide();
 };
 

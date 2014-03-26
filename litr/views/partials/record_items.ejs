@@ -1,22 +1,24 @@
-<% _.each(items, function (model) { %>
-<div class="item">
+<div class="items-container">
+    <% _.each(items, function (model) { %>
+    <div class="item">
     <% if (model.user) { %>
-    <div class="user">
-        <span class="image" style="background-image:url(http://www.gravatar.com/avatar/<%= model.user ? toMd5(model.user.email): '' %>?d=mm&1);"></span>
-        
-        <span class="name"><a href="<%- apiConfig.userViewUrl %>?id=<%- model.user.id %>"><%= normalizeUserName(model.user) %></a></span>
-    </div>
-    <% } %>
-    <div class="record">
-        <% if (model.message) { %>
-        <div class="summary">
-            <%- model.message %>
+        <div class="user">
+            <span class="image" style="background-image:url(http://www.gravatar.com/avatar/<%= model.user ? toMd5(model.user.email): '' %>?d=mm&1);"></span>
+            
+            <span class="name"><a href="<%- apiConfig.userViewUrl %>?id=<%- model.user.id %>"><%= normalizeUserName(model.user) %></a></span>
         </div>
-        <% } %>
+    <% } %>
+        <div class="record">
+            <% if (model.message) { %>
+            <div class="summary">
+                <%- findUrlAndMakeTag(model.message, 35) %>
+            </div>
+            <% } %>
+        </div>
+        <%- partial('../partials/attachment', { data: model }) %>
+        <div class="meta">
+            <span class="date"><%= toHumanDate(model.createdAt).fromNow() %></span>
+        </div>
     </div>
-    <%- partial('../partials/attachment', { data: model }) %>
-    <div class="meta">
-        <span class="date"><%= toHumanDate(model.createdAt).fromNow() %></span>
-    </div>
+    <% }) %>
 </div>
-<% }) %>

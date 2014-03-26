@@ -749,15 +749,29 @@ body {
     }
 }
 
-.form-container {
+.add-form-container {
     /*padding: 15px;*/
 
-    .form-attachment-container {
+    .attachment-container {
         margin-bottom: 10px;
-        border: 1px solid #eee;
-        padding: 15px 15px 0 15px;
-        border-radius: 3px;
+        border-color: #eee;
+        border-width: 1px 0 1px 0;
+        border-style: solid;
+        padding: 15px 0 0 0;
+        /*border-radius: 3px;*/
         display: none;
+    }
+
+    .form {
+        .field {
+            .element {
+                &.message-element {
+                    textarea {
+                        height: 75px;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -771,11 +785,16 @@ body {
                 border: 1px solid #f3f3f3;
                 width: 98%;
                 padding: .2em 1%;
-                font-size: 1.2em;
+                font-size: 1em;
                 font-family: sans-serif;
                 background: transparent;
                 color:#666666;
                 border-radius: 3px;
+
+                &:focus {
+                    outline: none;
+                    border-color: #C8C8C8;
+                }
             }
 
             textarea {
@@ -868,14 +887,18 @@ body {
     position: absolute;
     position: fixed;
     left: 50%;
-    top: 135px;
+    top: -100%;
     width: 300px;
     height: auto;
     background: #fff;
     z-index: 1000;
     padding: 5px;
-    border-radius: 0 0 3px 3px;
-    display: none;
+    border-radius: 0 0 3px 3px;   
+
+    &.show {
+        top: 120px;
+        transition: .3s;
+    }
 
     .jquery-dialog-title {
         position: absolute;
@@ -927,6 +950,11 @@ body {
     height: 100%;
     z-index: 500;
     background: #666666;
-    opacity: .5;
+    opacity: 0;
     display: none;
+
+    &.show {
+        transition: .3s;
+        opacity: .5;
+    }
 }
