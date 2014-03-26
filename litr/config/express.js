@@ -66,7 +66,7 @@ function shortUrl(url, l) {
 
   var start_chunk = shortString(url, chunk_l, false);
   var end_chunk = shortString(url, chunk_l, true);
-  return start_chunk + ".." + end_chunk;
+  return start_chunk + "&hellip;" + end_chunk;
 }
 
 function findUrlAndMakeTag(str, l) {
