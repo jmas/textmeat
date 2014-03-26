@@ -14,7 +14,7 @@
                 <li <%- target.controller == 'topic' ? 'class="active"': '' %>><a href="/topic/index"><%- __('Topics') %></a></li>
             </ul>
             <ul class="second">
-                <li><a class="button add-button" href="/record/add">+</a></li>
+                <li><a class="button add-button" href="/record/add" data-add-btn-el>+</a></li>
             </ul>
         </div>
     </div>
@@ -38,14 +38,16 @@
 <!--TEMPLATES END-->
 
 <script>
-$.get(window.api.config.recordAddUrl + '?lite=1').done(function(html) {
-  $(html)
-    
-    .dialogOpen({
-      width: 500,
-      height: 300
-    });
+(function() {
+
+var addBtnEl = $('[data-add-btn-el]');
+
+addBtnEl.on('click', function() {
+  window.api.openAddDialog();
+  return false;
 });
+
+})();
 </script>
 
   </body>

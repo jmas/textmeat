@@ -1,10 +1,34 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, user-scalable=no" />
 <script>
-  (function() {
-    window.api = {};
-    window.api.config = <%- JSON.stringify(apiConfig, null, 2) %>;
-  })();
+(function() {
+var api = {};
+
+api.config = <%- JSON.stringify(apiConfig, null, 2) %>;
+
+api.openAddDialog = function() {
+  var content;
+
+  $.get(api.config.recordAddUrl + '?lite=1').done(function(html) {
+    content = $(html);
+      
+    content.find('[data-cancel-btn-el]').on('click', function() {
+      $.fn.closeDialog();
+      return false;
+    });
+
+    content
+      .openDialog({
+        width: 500,
+        height: 300,
+        title: '<%- __('Add new Record') %>'
+      });
+  });
+};
+
+window.api = api;
+})();
 </script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" onerror="this.src='/js/jquery.min.js';"></script>
 <script src="/js/jquery.dialog.js"></script>
+<script src="/js/jquery.mask.js"></script>

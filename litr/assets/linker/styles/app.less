@@ -750,10 +750,10 @@ body {
 }
 
 .form-container {
-    padding: 15px;
+    /*padding: 15px;*/
 
     .form-attachment-container {
-        margin-bottom: 30px;
+        margin-bottom: 10px;
         border: 1px solid #eee;
         padding: 15px 15px 0 15px;
         border-radius: 3px;
@@ -761,9 +761,9 @@ body {
     }
 }
 
-.large-form {
+.form {
     .field {
-        margin:30px 0;
+        margin-bottom:10px;
 
         .element {
             input,
@@ -771,16 +771,18 @@ body {
                 border: 1px solid #f3f3f3;
                 width: 98%;
                 padding: .2em 1%;
-                font-size: 2em;
+                font-size: 1.2em;
                 font-family: sans-serif;
                 background: transparent;
                 color:#666666;
+                border-radius: 3px;
             }
 
             textarea {
                 height: 100px;
                 max-width: 98%;
                 min-width: 98%;
+                display: block;
             }
         }
 
@@ -816,13 +818,13 @@ body {
         }
     }
 
-    .control {
+    /*.control {
         input,
         button,
         a {
-            font-size: 1.5em;
+            font-size: 1em;
         }
-    }
+    }*/
 }
 
 .text-explore-container {
@@ -866,17 +868,18 @@ body {
     position: absolute;
     position: fixed;
     left: 50%;
-    top: 20%;
+    top: 135px;
     width: 300px;
     height: auto;
     background: #fff;
     z-index: 1000;
     padding: 5px;
     border-radius: 0 0 3px 3px;
+    display: none;
 
     .jquery-dialog-title {
         position: absolute;
-        top: -45px;
+        top: -46px;
         left: 0;
         width: 100%;
         border-bottom: 1px solid #f1f3f7;
@@ -884,6 +887,13 @@ body {
         height: 45px;
         background: #fff;
         border-radius: 3px 3px 0 0;
+
+        .jquery-dialog-title-text {
+            padding-left: 5px;
+            font-size: .9em;
+            color: #888888;
+            text-align: center;
+        }
 
         .jquery-dialog-close {
             position: absolute;
@@ -893,7 +903,7 @@ body {
             height: 45px;
             line-height: 45px;
             text-align: center;
-            font-size: 1.2em;
+            font-size: 1.3em;
             color: #666666;
 
             &:hover {
@@ -905,7 +915,18 @@ body {
 
     .jquery-dialog-content {
         color: #434343;
-        overflow-y: auto;
-        overflow-x: hidden;
+        padding:5px;
     }
+}
+
+.jquery-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+    background: #666666;
+    opacity: .5;
+    display: none;
 }

@@ -1,5 +1,5 @@
 <div class="form-container" data-form-container-el>
-    <form class="large-form" action="<%- apiConfig.recordCreateUrl %>" method="post">
+    <form class="form" action="<%- apiConfig.recordCreateUrl %>" method="post">
         <input type="hidden" name="title" data-title-el />
         <input type="hidden" name="url" data-url-el />
         <input type="hidden" name="imageUrl" data-image-url-el />
@@ -8,13 +8,13 @@
 
         <div class="field">
             <div class="element">
-                <textarea name="message" placeholder="<%- __('Write thoughts or put URL here') %>" data-message-el></textarea>
+                <textarea name="message" placeholder="<%- __('Write thoughts or put URL here') %>" autofocus data-message-el></textarea>
             </div>
         </div>
         <div class="form-attachment-container" data-attachment-container-el></div>
         <div class="control">
-            <input class="button" type="submit" value="Add" />
-            <a class="button simple-button" href="<%- apiConfig.recordIndexUrl %>">Cancel</a>
+            <input class="button" type="submit" value="<%- __('Add') %>" />
+            <a class="button simple-button" href="<%- apiConfig.recordIndexUrl %>" data-cancel-btn-el><%- __('Cancel') %></a>
         </div>
     </form>
 </div>
@@ -26,18 +26,6 @@
 
 (function() {
 
-/*$.fn.notebook.defaults = {
-    autoFocus: false,
-    placeholder: 'Text',
-    mode: 'multiline', // multiline or inline
-    modifiers: ['bold', 'italic', 'underline', 'h1', 'h2', 'ol', 'ul', 'anchor']
-};*/
-
-/*var urlEl = $('[data-url-el]'),
-    titleEl = $('[data-title-el]'),
-    contentEl = $('[data-content-el]');
-    contentEditorEl = $('[data-content-editor-el]');*/
-
 var containerEl = $('[data-form-container-el]'),
     messageEl = containerEl.find('[data-message-el]'),
     attachmentContainerEl = containerEl.find('[data-attachment-container-el]'),
@@ -47,15 +35,6 @@ var containerEl = $('[data-form-container-el]'),
     contentEl = containerEl.find('[data-content-el]'),
     cuttedContentEl = containerEl.find('[data-cutted-content-el]'),
     maxLength = 255;
-
-console.log(titleEl);
-
-/*contentEditorEl.notebook();*/
-
-// Editor
-/*contentEditorEl.on('contentChange', function(e) {
-  contentEl.val(contentEditorEl.html());
-});*/
 
 // Url
 messageEl.on('change', function() {

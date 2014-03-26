@@ -1,39 +1,37 @@
 (function($) {
 
-var container,
+var containerEl,
 	options = {
 		onClose: null,
 		onOpen: null
 	};
 
 function init() {
-	if (! container) {
-		container = $('<div class="jquery-mask"></div>').appendTo('body');
+	if (! containerEl) {
+		containerEl = $('<div class="jquery-mask"></div>').appendTo('body');
 	}
 }
 
-$.fn.maskSetup = function(opt) {
+$.fn.setupMask = function(opt) {
 	options = $.extend(options, opt);
 };
 
-$.fn.maskOpen = function(newContent, opt) {
+$.fn.showMask = function(opt) {
 	init();
 
 	opt = $.extend(options, opt);
 
-	content.append(newContent);
+	containerEl.show();
 
 	opt.onOpen instanceof Function && opt.onOpen();
 };
 
-$.fn.maskClose = function(opt) {
+$.fn.hideMask = function(opt) {
 	opt = $.extend(options, opt);
 
 	opt.onHide instanceof Function && opt.onHide();
 
-	content.html('');
-
-	container.hide();
+	containerEl.hide();
 };
 
 })(window.jQuery);

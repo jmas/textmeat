@@ -1,7 +1,9 @@
 (function($) {
 
-var container,
-	content,
+var containerEl,
+	contentEl,
+	closeEl,
+	titleTextEl,
 	options = {
 		width: 300,
 		height: 400,
@@ -10,34 +12,47 @@ var container,
 	};
 
 function init() {
-	if (! container) {
-		container = $('\
+	if (! containerEl) {
+		containerEl = $('\
 			<div class="jquery-dialog">\
-				<div class="jquery-dialog-title"><div class="jquery-dialog-close">&times;</div></div>\
+				<div class="jquery-dialog-title">\
+					<div class="jquery-dialog-title-text"></div>\
+					<div class="jquery-dialog-close">&times;</div>\
+				</div>\
 				<div class="jquery-dialog-inside">\
 					<div class="jquery-dialog-content"></div>\
 				</div>\
 			</div>')
 			.appendTo('body');
 
-		content = container.find('.jquery-dialog-content');
+		titleTextEl = containerEl.find('.jquery-dialog-title-text');
+		closeEl = containerEl.find('.jquery-dialog-close');
+		contentEl = containerEl.find('.jquery-dialog-content');
+
+		closeEl.on('click', function() {
+			$.fn.closeDialog();
+		});
 	}
 }
 
-$.fn.dialogSetup = function(opt) {
+$.fn.setupDialog = function(opt) {
 	options = $.extend(options, opt);
 };
 
-$.fn.dialogOpen = function(opt) {
+$.fn.openDialog = function(opt) {
 	init();
 
 	opt = $.extend(options, opt);
 
 	console.log(this);
 
-	content.html($(this));
+	contentEl.html($(this));
 
-	container
+	if (opt.title) {
+		titleTextEl.text(opt.title);
+	}
+
+	containerEl
 		.width(opt.width)
 		//.height(opt.height)
 		.css({
@@ -45,15 +60,22 @@ $.fn.dialogOpen = function(opt) {
 			//marginTop: '-' + (opt.height / 2 + 5) + 'px'
 		});
 
+	containerEl.show();
+
+	$.fn.showMask();
+
 	opt.onOpen instanceof Function && opt.onOpen();
 };
 
-$.fn.dialogClose = function() {
+$.fn.closeDialog = function() {
 	options.onHide instanceof Function && options.onHide();
 
-	content.html('');
+	$.fn.hideMask();
 
-	container.hide();
+	contentEl.html('');
+	titleTextEl.text('');
+
+	containerEl.hide();
 };
 
 })(window.jQuery);
