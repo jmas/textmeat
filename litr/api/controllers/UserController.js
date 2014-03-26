@@ -24,8 +24,6 @@ var actionView = function(req, res) {
     return res.json({ error: 'user not exists' }, 404);
   }
 
-  console.log(req.options.action, id, req.session.user);
-
   if (req.options.action == 'view' && id == req.session.user) {
     res.redirect(res.locals.apiConfig.userIndexUrl);
   }
@@ -60,8 +58,6 @@ var actionView = function(req, res) {
         .populate('user')
         .sort({'createdAt': -1})
         .exec(function(err, items) {
-          console.log('err: ', JSON.stringify(err), items);
-
           if (err) return res.json({ error: 'DB error' }, 500);
 
           if (id == req.session.user) {

@@ -1,3 +1,4 @@
+<% if (data.url) { %>
 <div class="attachment">
     <% if (data.imageUrl || data.url) { %>
     <div class="image" style="background-image:url(<%- data.imageUrl %>);">
@@ -19,3 +20,4 @@
         </div>
     </div>
 </div>
+<% } %>

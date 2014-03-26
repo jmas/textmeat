@@ -24,6 +24,10 @@ module.exports = {
     readersCount: {
       type: 'integer',
       defaultsTo: '0'
+    },
+    recordsCount: {
+      type: 'integer',
+      defaultsTo: '0'
     }
   }
 

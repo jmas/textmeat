@@ -72,7 +72,7 @@ module.exports = {
           user.recordsCount = user.recordsCount + 1;
 
           user.save(function(err) {
-            console.log(err);
+            //console.log(err);
           });
 
           return res.json(model);

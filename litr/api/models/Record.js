@@ -21,15 +21,14 @@ module.exports = {
 
     url: 'string',
     message: {
-      type: 'text'
+      type: 'text',
+      required: true
     },
     title: {
-      type: 'text',
-      required: true
+      type: 'text'
     },
     content: {
-      type: 'text',
-      required: true
+      type: 'text'
     },
     imageUrl: {
       type: 'string'
@@ -51,7 +50,7 @@ module.exports = {
     //     return '';
     //   }
     // }
-  }//,
+  },
 
   // beforeValidation: function(attrs, next) {
   //   if (! attrs.url || (! attrs.title && ! attrs.content)) {
@@ -61,9 +60,61 @@ module.exports = {
   //   return next();
   // },
 
-  // beforeCreate: function() {
-  //   return fillContentHtml.apply(this, arguments);
-  // },
+  beforeCreate: function(values, cb) {
+    var topics,
+        newTopics=[];
+
+    // search for topics
+    if (values.message) {
+      topics = values.message.match(/#\w+?\b/ig);
+      
+      if (topics.length > 0) {
+        _.each(topics, function(name) {
+          name = name.substring(1);
+          
+          Topic.findOne()
+            .where({
+              name: new RegExp(name, 'ig')
+            })
+            .done(function(err, model) {
+              if (err) { return; }
+
+              if (model) {
+                model.recordsCount = model.recordsCount || 0;
+                model.recordsCount++;
+                model.save(function() {});
+              } else {
+                Topic.create({
+                  name: name
+                }).exec(function() {});
+              }
+            });
+        });
+
+        console.log('newTopics:', newTopics);
+
+        // Topic
+        //   .findOrCreate(newTopics, newTopics)
+        //   .done(function(err, models) {
+        //     if (err) { return; }
+
+        //     _.each(models, function(model) {
+        //       console.log('topic err, model:', model);
+        //       if (err) { return; }
+
+        //       model.recordsCount = model.recordsCount || 0;
+        //       model.recordsCount++;
+
+        //       console.log('new topic: ', model);
+
+        //       model.save();
+        //     });
+        //   });
+      }
+    }
+
+    cb();
+  }
 
   // beforeUpdate: function() {
   //   return fillContentHtml.apply(this, arguments);

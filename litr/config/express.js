@@ -70,7 +70,7 @@ function shortUrl(url, l) {
 }
 
 function findUrlAndMakeTag(str, l) {
-  return str.replace(/(\b((https?|ftp|file):\/\/)?[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig, function(url) {
+  return str.replace(/(\b(((https?|ftp|file):\/\/)|www\.)[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig, function(url) {
     return '<a href="' + url + '" target="_blank">' + shortUrl(url, l) + '</a>';
   });
 }

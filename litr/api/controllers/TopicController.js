@@ -38,7 +38,7 @@ module.exports = {
         }
 
         Topic.find()
-          .sort({'createdAt': 1})
+          .sort({'recordsCount': -1, 'createdAt': 1})
           .exec(function(err, items) {
             if (err) return res.json({ error: err.toString() }, 500);
 
