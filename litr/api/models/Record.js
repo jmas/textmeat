@@ -66,9 +66,9 @@ module.exports = {
 
     // search for topics
     if (values.message) {
-      topics = values.message.match(/#\w+?\b/ig);
+      topics = values.message.match(/\#[A-Za-zА-Яа-я0-9\-\_]+/ig);
       
-      if (topics.length > 0) {
+      if (topics && topics.length > 0) {
         _.each(topics, function(name) {
           name = name.substring(1);
           

@@ -76,7 +76,7 @@ function findUrlAndMakeTag(str, l) {
 }
 
 function findTopicAndMakeTag(str) {
-  return str.replace(/#\w+?\b/ig, function(t) {
+  return str.replace(/\#[A-Za-zА-Яа-я0-9\-\_]+/ig, function(t) {
     return '<a class="topic" href="/topic/view?name=' + t.substring(1) + '">' + t.substring(1) + '</a>'
   });
 }

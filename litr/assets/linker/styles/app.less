@@ -355,18 +355,20 @@ body {
                 font-size: .9em;
                 line-height: 1.5em;
 
-                a.topic {
+                .topic {
+                    color: #666666;
                     display: inline;
-                    background: #D8D8D8;
-                    color: #fff;
+                    /*background: #D8D8D8;*/
+                    /*color: #fff;*/
                     border-radius: 3px;
                     padding: 0 3px;
-                    font-size: .9em;
                     line-height: 1.2em;
+                    border: 1px solid #D8D8D8;
 
-                    &:hover {
-                        background: #666666;
-                    }
+                    /*&:hover {
+                        color: #6fa8dc;
+                        border-color: #6fa8dc;
+                    }*/
                 }
             }
         }
@@ -407,6 +409,13 @@ body {
             a,
             .title a {
                 color: #6fa8dc;
+            }
+
+            .record {
+                .topic {
+                    color: #6fa8dc;
+                    border-color: #6fa8dc;
+                }
             }
 
             /*.topics {
