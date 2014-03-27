@@ -11,7 +11,7 @@
         <div class="record">
             <% if (model.message) { %>
             <div class="summary">
-                <%- findUrlAndMakeTag(model.message, 35) %>
+                <%- findTopicAndMakeTag(findUrlAndMakeTag(model.message, 35)) %>
             </div>
             <% } %>
         </div>

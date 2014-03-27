@@ -75,6 +75,12 @@ function findUrlAndMakeTag(str, l) {
   });
 }
 
+function findTopicAndMakeTag(str) {
+  return str.replace(/#\w+?\b/ig, function(t) {
+    return '<a class="topic" href="/topic/view?name=' + t.substring(1) + '">' + t.substring(1) + '</a>'
+  });
+}
+
 module.exports.express = {
     customMiddleware: function(app){
         app.use(function(req, res, next) {
@@ -84,6 +90,7 @@ module.exports.express = {
           res.locals.normalizeUserName = normalizeUserName;
           res.locals.toHumanDate = toHumanDate;
           res.locals.findUrlAndMakeTag = findUrlAndMakeTag;
+          res.locals.findTopicAndMakeTag = findTopicAndMakeTag;
 
           if (req.session.user) {
               User.findOne({ id: req.session.user }, function(err, user) {

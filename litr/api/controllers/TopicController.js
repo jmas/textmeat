@@ -51,13 +51,23 @@ module.exports = {
   },
 
   view: function(req, res) {
-    if (! req.query.id) {
-      return res.json({ error: 'param id is required' }, 500);
+    if (! req.query.id && ! req.query.name) {
+      return res.json({ error: 'param id or name is required' }, 500);
     }
 
-    var id = req.query.id;
+    var id = req.query.id,
+        name = req.query.name,
+        where;
 
-    Topic.findOne(id)
+    if (id) {
+      where = { id: id };
+    } else {
+      where = { name: name };
+    }
+
+    Topic
+      .findOne()
+      .where(where)
       .exec(function(err, model) {
         if (err) return res.json({ error: err.toString() }, 500);
 
