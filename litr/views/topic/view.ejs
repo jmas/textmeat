@@ -13,8 +13,11 @@
             </div>
         </div>
         <div class="control">
-            <a class="button trust-button" href="#">Reading</a>
-            <!-- <a class="button" href="#">Read</a> -->
+        <% if (readingTopics.indexOf(model.id) >= 0) { %>
+            <a class="button trust-button" href="<%- apiConfig.topicUnreadUrl %>?id=<%- model.id %>"><%- __('Reading') %></a>
+        <% } else { %>
+            <a class="button" href="<%- apiConfig.topicReadUrl %>?id=<%- model.id %>"><%- __('Read') %></a>
+        <% } %>
         </div>
     </div>
 </div>

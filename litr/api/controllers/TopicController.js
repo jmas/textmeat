@@ -53,6 +53,8 @@ module.exports = {
   },
 
   view: function(req, res) {
+    var readingTopics = [];
+
     if (! req.query.id && ! req.query.name) {
       return res.json({ error: 'param id or name is required' }, 500);
     }
@@ -67,28 +69,41 @@ module.exports = {
       where = { name: name };
     }
 
-    Topic
-      .findOne()
-      .where(where)
-      .exec(function(err, model) {
+    User.findOne(req.session.user)
+      .populate('readingTopics')
+      .exec(function(err, user) {
         if (err) return res.json({ error: err.toString() }, 500);
 
-        Record
-          .find()
-          .populate('user')
-          .where({
-            message: new RegExp('#' + model.name, 'ig')
-          })
-          .sort({'createdAt': -1})
-          .exec(function(err, records) {
+        if (user.readingTopics) {
+          _.each(user.readingTopics, function(item) {
+            readingTopics.push(item.id);
+          });
+        }
+
+        Topic
+          .findOne()
+          .where(where)
+          .exec(function(err, model) {
             if (err) return res.json({ error: err.toString() }, 500);
 
-            return res.view({
-              model: model,
-              records: records
-            });
+            Record
+              .find()
+              .populate('user')
+              .where({
+                message: new RegExp('#' + model.name, 'ig')
+              })
+              .sort({'createdAt': -1})
+              .exec(function(err, records) {
+                if (err) return res.json({ error: err.toString() }, 500);
+
+                return res.view({
+                  model: model,
+                  readingTopics: readingTopics,
+                  records: records
+                });
+              });
           });
-      });
+    });
 
     // Topic
     //   .findOne()
