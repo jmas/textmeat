@@ -15,6 +15,10 @@ module.exports = {
       via: 'readingTopics',
       dominant: true
     },
+    records: {
+      collection: 'record',
+      via: 'topics'
+    },
 
     // fields
     name: {

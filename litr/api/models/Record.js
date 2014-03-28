@@ -15,10 +15,17 @@
 module.exports = {
 
   attributes: {
+    // associations
     user: {
       model: 'user'
     },
+    topics: {
+      collection: 'topic',
+      via: 'records',
+      dominant: true
+    },
 
+    // fields
     url: 'string',
     message: {
       type: 'text',
@@ -60,58 +67,78 @@ module.exports = {
   //   return next();
   // },
 
-  beforeCreate: function(values, cb) {
+  afterCreate: function(values, cb) {
     var topics,
         newTopics=[];
 
-    // search for topics
-    if (values.message) {
-      topics = values.message.match(/\#[A-Za-zА-Яа-я0-9\-\_]+/ig);
-      
-      if (topics && topics.length > 0) {
-        _.each(topics, function(name) {
-          name = name.substring(1);
+    Record
+      .findOne(values.id)
+      .populate('topics')
+      .done(function(err, record) {
+        console.log(err, record);
+
+        if (err) { return; }
+
+        // search for topics
+        if (values.message) {
+          topics = values.message.match(/\#[A-Za-zА-Яа-я0-9\-\_]+/ig);
+
+          function appendTopicToRecord(topic) {
+            record.topics.add(topic.id);
+            record.save(function() {});
+          }
           
-          Topic.findOne()
-            .where({
-              name: new RegExp(name, 'ig')
-            })
-            .done(function(err, model) {
-              if (err) { return; }
+          if (topics && topics.length > 0) {
+            _.each(topics, function(name) {
+              name = name.substring(1);
+              
+              Topic.findOne()
+                .where({
+                  name: new RegExp(name, 'ig')
+                })
+                .done(function(err, model) {
+                  if (err) { return; }
 
-              if (model) {
-                model.recordsCount = model.recordsCount || 0;
-                model.recordsCount++;
-                model.save(function() {});
-              } else {
-                Topic.create({
-                  name: name
-                }).exec(function() {});
-              }
+                  if (model) {
+                    model.recordsCount = model.recordsCount || 0;
+                    model.recordsCount++;
+                    model.save(function(err, model) {
+                      if (err) { return; }
+                      appendTopicToRecord(model);
+                    });
+                  } else {
+                    Topic.create({
+                      name: name
+                    }).exec(function(err, model) {
+                      if (err) { return; }
+                      appendTopicToRecord(model);
+                    });
+                  }
+                });
             });
-        });
 
-        console.log('newTopics:', newTopics);
+            console.log('newTopics:', newTopics);
 
-        // Topic
-        //   .findOrCreate(newTopics, newTopics)
-        //   .done(function(err, models) {
-        //     if (err) { return; }
+            // Topic
+            //   .findOrCreate(newTopics, newTopics)
+            //   .done(function(err, models) {
+            //     if (err) { return; }
 
-        //     _.each(models, function(model) {
-        //       console.log('topic err, model:', model);
-        //       if (err) { return; }
+            //     _.each(models, function(model) {
+            //       console.log('topic err, model:', model);
+            //       if (err) { return; }
 
-        //       model.recordsCount = model.recordsCount || 0;
-        //       model.recordsCount++;
+            //       model.recordsCount = model.recordsCount || 0;
+            //       model.recordsCount++;
 
-        //       console.log('new topic: ', model);
+            //       console.log('new topic: ', model);
 
-        //       model.save();
-        //     });
-        //   });
-      }
-    }
+            //       model.save();
+            //     });
+            //   });
+          }
+        }
+      });
 
     cb();
   }

@@ -4,8 +4,12 @@
     <div class="meta">
         <div class="stat">
             <div class="item">
-                <div class="title">Readers</div>
+                <div class="title"><%- __('Readers') %></div>
                 <div class="count"><%- model.readersCount ? model.readersCount: '0' %></div>
+            </div>
+            <div class="item">
+                <div class="title"><%- __('Records') %></div>
+                <div class="count"><%- model.recordsCount ? model.recordsCount: '0' %></div>
             </div>
         </div>
         <div class="control">
@@ -14,3 +18,11 @@
         </div>
     </div>
 </div>
+
+<% if (model.records.length > 0) { %>
+<div class="text-container">
+    <div class="feed-list">
+        <%- partial('../partials/record_items', { items: model.records }) %>
+    </div>
+</div>
+<% } %>

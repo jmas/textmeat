@@ -1,7 +1,7 @@
 <div class="items-container">
     <% _.each(items, function (model) { %>
     <div class="item">
-    <% if (model.user) { %>
+    <% if (model.user && model.user instanceof Object) { %>
         <div class="user">
             <span class="image" style="background-image:url(http://www.gravatar.com/avatar/<%= model.user ? toMd5(model.user.email): '' %>?d=mm&1);"></span>
             
