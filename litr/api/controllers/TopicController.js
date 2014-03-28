@@ -29,8 +29,6 @@ module.exports = {
       .exec(function(err, user) {
         if (err) return res.json({ error: err.toString() }, 500);
 
-        console.log('RT:', user);
-
         if (user.readingTopics) {
           _.each(user.readingTopics, function(item) {
             readingTopics.push(item.id);
@@ -72,14 +70,58 @@ module.exports = {
     Topic
       .findOne()
       .where(where)
-      .populate('records')
       .exec(function(err, model) {
         if (err) return res.json({ error: err.toString() }, 500);
 
-        return res.view({
-          model: model
-        });
+        Record
+          .find()
+          .populate('user')
+          .where({
+            message: new RegExp('#' + model.name, 'ig')
+          })
+          .sort({'createdAt': -1})
+          .exec(function(err, records) {
+            if (err) return res.json({ error: err.toString() }, 500);
+
+            return res.view({
+              model: model,
+              records: records
+            });
+          });
       });
+
+    // Topic
+    //   .findOne()
+    //   .where(where)
+    //   .populate('records', { sort: { 'createdAt': 1 } })
+    //   .exec(function(err, model) {
+    //     if (err) return res.json({ error: err.toString() }, 500);
+
+    //     if (model.records) {
+    //       var recCount = model.records.length;
+    //       var done = function() {
+    //         recCount--;
+    //         if (recCount<=0) {
+    //           return res.view({
+    //             model: model
+    //           });
+    //         }
+    //       };
+
+    //       _.each(model.records, function(record) {
+    //         User.findOne(record.user).exec(function(err, user) {
+    //           if (err) { return done(); }
+
+    //           record.user = user;
+    //           done();
+    //         });
+    //       });
+    //     } else {
+    //       return res.view({
+    //         model: model
+    //       });
+    //     }
+    //   });
   },
 
   read: function(req, res) {

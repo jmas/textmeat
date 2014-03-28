@@ -141,9 +141,15 @@ module.exports = {
       });
 
     cb();
-  }
+  },
 
   // beforeUpdate: function() {
   //   return fillContentHtml.apply(this, arguments);
   // }
+
+  _config: {
+    populate: {
+        user: true
+    }
+  }
 };

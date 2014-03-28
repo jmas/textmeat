@@ -49,7 +49,7 @@ messageEl.on('change', function() {
       matchedImagesUrls,
       cuttedContent;
 
-  matchedUrls = text.match(/(\b((https?|ftp|file):\/\/)?[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig);
+  matchedUrls = text.match(/(\b(((https?|ftp|file):\/\/)|www\.)[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig);
 
   if (matchedUrls) {
     url = matchedUrls[0];

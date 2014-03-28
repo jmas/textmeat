@@ -19,10 +19,10 @@
     </div>
 </div>
 
-<% if (model.records.length > 0) { %>
+<% if (records.length > 0) { %>
 <div class="text-container">
     <div class="feed-list">
-        <%- partial('../partials/record_items', { items: model.records }) %>
+        <%- partial('../partials/record_items', { items: records }) %>
     </div>
 </div>
 <% } %>
