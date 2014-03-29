@@ -77,13 +77,21 @@ module.exports = {
   view: actionView,
   
   login: function (req, res) {
+    console.log('query:', req.body);
+
+    if (! req.body) {
+      return res.view({
+        layout: 'simple_layout'
+      });
+    }
+
     var bcrypt = require('bcrypt');
 
-    User.findOneByEmail(req.query.email).done(function (err, user) {
+    User.findOneByEmail(req.body.email).done(function (err, user) {
       if (err) return res.json({ error: 'DB error' }, 500);
 
       if (user) {
-        bcrypt.compare(req.query.password, user.password, function (err, match) {
+        bcrypt.compare(req.body.password, user.password, function (err, match) {
           if (err) return res.json({ error: 'Server error' }, 500);
 
           if (match) {
@@ -100,6 +108,11 @@ module.exports = {
         return res.json({ error: 'User not found' }, 404);
       }
     });
+  },
+
+  logout: function(req, res) {
+    req.session.destroy();
+    res.redirect(res.locals.apiConfig.userLoginUrl);
   },
 
   create: function(req, res) {

@@ -1,0 +1,43 @@
+<div class="form-container">
+  <form id="loginForm" action="<%- apiConfig.userLoginUrl %>" class="large-form" method="post">
+    <div class="field">
+      <div class="element">
+        <input name="email" class="element-input" type="text" placeholder="<%- __('E-mail') %>" autofocus />
+      </div>
+    </div>
+    <div class="field">
+      <div class="element">
+        <input name="password" class="element-input" type="password" placeholder="<%- __('Password') %>" />
+      </div>
+    </div>
+    <div class="control">
+      <input class="button" type="submit" value="<%- __('Login') %>" />
+      <a class="button simple-button" href="<%- apiConfig.userRegisterUrl %>"><%- __('Register') %></a>
+    </div>
+  </form>
+</div>
+
+<script>
+(function() {
+
+var loginFormEl = $('#loginForm'),
+    emailEl = loginFormEl.find('[name="email"]'),
+    passwordEl = loginFormEl.find('[name="password"]'),
+    loginUrl = '<%- apiConfig.userLoginUrl %>',
+    userIndexUrl = '<%- apiConfig.userIndexUrl %>'; 
+
+loginFormEl.on('submit', function() {
+  $.post(loginUrl, {
+    email: emailEl.val(),
+    password: passwordEl.val()
+  }).done(function() {
+    location.href = userIndexUrl;
+  }).fail(function() {
+    location.href = loginUrl;
+  });
+
+  return false;
+});
+
+})();
+</script>

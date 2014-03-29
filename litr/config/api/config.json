@@ -5,6 +5,7 @@
 	"recordAddUrl": "/record/add",
 	"recordCreateUrl": "/record/create",
 	"recordAttrchmentHtmlUrl": "/record/attachmentHtml",
+	"userLoginUrl": "/user/login",
 	"userIndexUrl": "/user/index",
 	"userViewUrl": "/user/view",
 	"userReadUrl": "/user/read",
