@@ -9,9 +9,9 @@
     <div class="nav">
         <div class="container">
             <ul>
-                <li <%- target.controller == 'user' && target.action == 'index' ? 'class="active"': '' %>><a href="/user/index"><%- sessionUser ? normalizeUserName(sessionUser): __('I am') %></a></li>
-                <li <%- target.controller == 'record' ? 'class="active"': '' %>><a href="/record/index"><%- __('Feed') %></a></li>
-                <li <%- target.controller == 'topic' ? 'class="active"': '' %>><a href="/topic/index"><%- __('Topics') %></a></li>
+                <li <%- req.options.controller == 'user' && req.options.action == 'index' ? 'class="active"': '' %>><a href="/user/index"><%- sessionUser ? normalizeUserName(sessionUser): __('I am') %></a></li>
+                <li <%- req.options.controller == 'record' ? 'class="active"': '' %>><a href="/record/index"><%- __('Feed') %></a></li>
+                <li <%- req.options.controller == 'topic' ? 'class="active"': '' %>><a href="/topic/index"><%- __('Topics') %></a></li>
             </ul>
             <ul class="second">
                 <li><a class="button add-button" href="/record/add" data-add-btn-el>&nbsp;</a></li>
