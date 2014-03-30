@@ -69,6 +69,36 @@ body {
     }
 }
 
+.spinner {
+  width: 30px;
+  height: 30px;
+  background-color: #6fa8dc;
+  border-radius: 3px;
+
+  margin: 30px auto;
+  -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+  animation: rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes rotateplane {
+  0% { -webkit-transform: perspective(120px) }
+  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes rotateplane {
+  0% { 
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+  } 50% { 
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+  } 100% { 
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
+
 .empty-message {
     padding: 15px;
     background-color: #fff;
@@ -784,6 +814,10 @@ body {
         padding: 15px 0 0 0;
         /*border-radius: 3px;*/
         display: none;
+
+        .spinner {
+            margin-bottom: 45px;
+        }
     }
 
     .form {

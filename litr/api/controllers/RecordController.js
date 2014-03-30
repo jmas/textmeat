@@ -27,14 +27,13 @@ module.exports = {
     User.findOne(req.session.user)
       .populate('reading')
       .exec(function(err, user) {
-        console.log('error: ', err);
         if (err) return res.json({ error: 'DB error' }, 500);
 
         _.each(user.reading, function(item) {
           reading.push(item.id)
         });
 
-        console.log(reading);
+        reading.push(req.session.user);
 
         Record.find()
           .where({ user: {'$in': reading} })
@@ -94,7 +93,6 @@ module.exports = {
     cleanedHtml = '';
 
     readability(url, function(err, doc) {
-      console.log('err: ', JSON.stringify(err));
       if (err) return res.json({ error: err.toString() }, 500);
 
       cleanedHtml = doc.getContent();
@@ -146,8 +144,6 @@ module.exports = {
     cleanedHtml = '';
 
     readability(url, function(err, doc) {
-      console.log('err: ', err);
-
       if (err) return res.json({ error: err.toString() }, 500);
 
       cleanedHtml = doc.getContent();
@@ -193,7 +189,6 @@ module.exports = {
   },
 
   view: function(req, res) {
-    console.log(req);
     Record.findOne({ id: req.query.id }, function(err, model) {
       if (err) return res.json({ error: 'DB error' }, 500);
       
