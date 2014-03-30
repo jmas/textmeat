@@ -18,7 +18,9 @@
 module.exports = {
 
   index: function(req, res) {
-    var reading = [];
+    var reading = [],
+        readingTopics = [],
+        orConditions = [];
 
     if (! req.session.user) {
       return res.json({ error: 'user not logged in' }, 500);
@@ -26,6 +28,7 @@ module.exports = {
 
     User.findOne(req.session.user)
       .populate('reading')
+      .populate('readingTopics')
       .exec(function(err, user) {
         if (err) return res.json({ error: 'DB error' }, 500);
 
@@ -33,10 +36,23 @@ module.exports = {
           reading.push(item.id)
         });
 
+        _.each(user.readingTopics, function(item) {
+          readingTopics.push(item.name);
+        });
+
         reading.push(req.session.user);
 
+        if (readingTopics.length > 0) {
+          readingTopics = new RegExp('\\#(' + readingTopics.join('|') + ')', 'ig');
+          orConditions.push({ message: readingTopics });
+        }
+
+        orConditions.push({ user: { '$in': reading } });
+
         Record.find()
-          .where({ user: {'$in': reading} })
+          .where({
+            or: orConditions
+          })
           .sort({'createdAt': -1})
           .populate('user')
           .exec(function(err, models) {
