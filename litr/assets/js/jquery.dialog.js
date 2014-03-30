@@ -32,6 +32,10 @@ function init() {
 		closeEl.on('click', function() {
 			$.fn.closeDialog();
 		});
+
+		$(document).keyup(function(e) {
+		  if (e.keyCode == 27) { $.fn.closeDialog(); }
+		});
 	}
 }
 
@@ -44,8 +48,6 @@ $.fn.openDialog = function(opt) {
 
 	opt = $.extend(options, opt);
 
-	console.log(this);
-
 	contentEl.html($(this));
 
 	if (opt.title) {
@@ -54,13 +56,12 @@ $.fn.openDialog = function(opt) {
 
 	containerEl
 		.width(opt.width)
-		//.height(opt.height)
 		.css({
-			marginLeft: '-' + (opt.width / 2 + 5) + 'px'//,
-			//marginTop: '-' + (opt.height / 2 + 5) + 'px'
+			marginLeft: '-' + (opt.width / 2 + 5) + 'px'
 		});
 
 	containerEl.show();
+
 	setTimeout(function() {
 		containerEl.addClass('show');
 	}, 1);
@@ -71,6 +72,10 @@ $.fn.openDialog = function(opt) {
 };
 
 $.fn.closeDialog = function() {
+	if (! containerEl.is(':visible')) {
+		return;
+	}
+
 	options.onHide instanceof Function && options.onHide();
 
 	$.fn.hideMask();
