@@ -28,4 +28,13 @@
         <%- partial('../partials/record_items', { items: records }) %>
     </div>
 </div>
+<% } else { %>
+<div class="empty-message">
+    <div class="text">
+        <p><%- __('To add Record &mdash; click Add Record and use hashtag <b>#%s</b>.', model.name) %></p>
+    </div>
+    <div class="buttons">
+        <p><a class="button" href="<%- apiConfig.topicIndexUrl %>" data-add-btn-el><%- __('Add Record') %></a></p>
+    </div>
+</div>
 <% } %>

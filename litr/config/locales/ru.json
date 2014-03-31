@@ -12,9 +12,12 @@
   "I reading": "Я читаю",
   "Settings": "Настройки",
   "Logout": "Выйти",
-  "Write thoughts or put URL here": "Напишите о чем думаете или вставьте ссылку",
+  "Write thoughts or put URL here": "Напиши о чем думаешь или вставь ссылку",
   "Click &laquo;Read&raquo; button on topic or writer to show records.":
-    "Что бы здесь появились записи &mdash; нажмите кнопку &laquo;Читать&raquo; в темах или профиле пользователя.",
+    "Что бы здесь появились записи &mdash; нажми кнопку &laquo;Читать&raquo; в темах или профиле пользователя.",
+  "To add Record &mdash; click Add Record and use hashtag <b>#%s</b>.":
+    "Что бы добавить запись &mdash; нажми Добавить запись, используй хэштег <b>#%s</b>.",
+  "Add Record": "Добавить запись",
   "Go to Topics": "Перейти в темы",
   "Read": "Читать",
   "Reading": "Читаю",
