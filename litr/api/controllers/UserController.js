@@ -15,8 +15,6 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
-var util = require("util");
-
 var actionView = function(req, res) {
   var id = req.query.id || req.session.user;
 
@@ -117,8 +115,6 @@ module.exports = {
 
   create: function(req, res) {
     User.create(req.query, function(err, user) {
-      console.log(JSON.stringify(err));
-
       if (err) return res.json({ error: err.toString() }, 500);
 
       return res.json(user);
@@ -195,6 +191,33 @@ module.exports = {
             });
           });
       });
+  },
+
+  setting: function(req, res) {
+    User.findOne(req.session.user)
+        .exec(function(err, user) {
+          console.log(err);
+          if (err) return res.json({ error: err.toString() }, 500);
+
+          if (! _.isEmpty(req.body)) {
+            if (! req.body.password) {
+              delete req.body.password;
+            }
+
+            User.update({ id: user.id }, req.body)
+              .exec(function(err, user) {
+                console.log('2', err);
+                if (err) return res.json({ error: err.toString() }, 500);
+
+                return res.json(user);
+              });
+          } else {
+            return res.view({
+              layout: 'simple_layout',
+              model: user
+            });
+          }
+        });
   },
 
   /**

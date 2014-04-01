@@ -34,9 +34,9 @@
             <a class="button simple-button" href="/user/setting"><%- __('Settings') %></a>
             <a class="button simple-button" href="/user/logout"><%- __('Logout') %></a>
         <% } else if (isRead) { %>
-            <a class="button trust-button" href="<%- apiConfig.userUnreadUrl %>?id=<%- user.id %>"><%- __('Reading') %></a>
+            <a class="button trust-button" href="<%- apiConfig.userUnreadUrl %>?id=<%- user.id %>" data-read-btn-el data-id="<%- user.id %>"><%- __('Reading') %></a>
         <% } else { %>
-            <a class="button" href="<%- apiConfig.userReadUrl %>?id=<%- user.id %>"><%- __('Read') %></a>
+            <a class="button" href="<%- apiConfig.userReadUrl %>?id=<%- user.id %>" data-read-btn-el data-id="<%- user.id %>"><%- __('Read') %></a>
         <% } %>
         </div>
     </div>
@@ -47,3 +47,33 @@
         <%- partial('../partials/record_items', { items: records }) %>
     </div>
 </div>
+
+<script>
+(function() {
+
+var readText = '<%- __('Read') %>',
+    readingText = '<%- __('Reading') %>',
+    readUrl = '<%- apiConfig.userReadUrl %>',
+    unreadUrl = '<%- apiConfig.userUnreadUrl %>',
+    useUrl;
+
+$('[data-read-btn-el]').on('click', function() {
+    var buttonEl = $(this);
+
+    if (buttonEl.hasClass('trust-button')) {
+        useUrl = unreadUrl;
+    } else {
+        useUrl = readUrl;
+    }
+
+    $.get(useUrl + '?id=' + buttonEl.data('id'))
+        .done(function(data) {
+            buttonEl.html(buttonEl.hasClass('trust-button') ? readText: readingText);
+            buttonEl.toggleClass('trust-button');
+        });
+
+    return false;
+});
+
+})();
+</script>

@@ -23,5 +23,10 @@
   "Reading": "Читаю",
   "Add new Record": "Добавить запись",
   "Add": "Добавить",
-  "Cancel": "Отмена"
+  "Save": "Сохранить",
+  "Cancel": "Отмена",
+  "Your Name": "Ваше имя",
+  "Your E-mail": "Адрес эл. почты",
+  "About yourself": "О вас",
+  "New Password (leave blank if not needed)": "Новый пароль (не обязателен)"
 }

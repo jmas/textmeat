@@ -10,6 +10,7 @@
 	"userViewUrl": "/user/view",
 	"userReadUrl": "/user/read",
 	"userUnreadUrl": "/user/unread",
+	"userSettingUrl": "/user/setting",
 	"topicIndexUrl": "/topic/index",
 	"topicViewUrl": "/topic/view",
 	"topicReadUrl": "/topic/read",

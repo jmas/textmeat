@@ -1,0 +1,48 @@
+<div class="form-container">
+    <form data-user-detting-form-el action="<%- apiConfig.userSettingUrl %>" class="large-form" method="post">
+        <div class="field">
+            <div class="element">
+                <input name="name" class="element-input" type="text" placeholder="<%- __('Your Name') %>" autofocus value="<%= model.name %>" />
+            </div>
+        </div>
+        <div class="field">
+            <div class="element">
+                <input name="email" class="element-input" type="text" placeholder="<%- __('Your E-mail') %>" value="<%= model.email %>" />
+            </div>
+        </div>
+        <div class="field">
+            <div class="element">
+                <input name="about" class="element-input" type="text" placeholder="<%- __('About yourself') %>" value="<%= model.about %>" />
+            </div>
+        </div>
+        <div class="field">
+            <div class="element">
+                <input name="password" class="element-input" type="password" placeholder="<%- __('New Password (leave blank if not needed)') %>" />
+            </div>
+        </div>
+        <div class="control">
+            <input class="button" type="submit" value="<%- __('Save') %>" />
+            <a class="button simple-button" href="<%- apiConfig.userIndexUrl %>"><%- __('Cancel') %></a>
+        </div>
+    </form>
+</div>
+
+<script>
+(function() {
+    
+var formEl = $('[data-user-detting-form-el]'),
+    userIndexUrl = '<%- apiConfig.userIndexUrl %>',
+    userSettingUrl = '<%- apiConfig.userSettingUrl %>';
+
+formEl.on('submit', function() {
+    var values = $(this).serializeObject();
+
+    $.post(userSettingUrl, values)
+        .done(function() {
+            location.href = userIndexUrl;
+        });
+    return false;
+});
+
+})();
+</script>
