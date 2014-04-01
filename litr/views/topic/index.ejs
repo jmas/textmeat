@@ -11,9 +11,9 @@
                 </div>
                 <div class="control">
                 <% if (readingTopics.indexOf(item.id) >= 0) { %>
-                    <a class="button trust-button" href="<%- apiConfig.topicUnreadUrl %>?id=<%- item.id %>"><%- __('Reading') %></a>
+                    <a class="button trust-button" href="<%- apiConfig.topicUnreadUrl %>?id=<%- item.id %>" data-read-btn-el data-topic-id="<%- item.id %>"><%- __('Reading') %></a>
                 <% } else { %>
-                    <a class="button" href="<%- apiConfig.topicReadUrl %>?id=<%- item.id %>"><%- __('Read') %></a>
+                    <a class="button" href="<%- apiConfig.topicReadUrl %>?id=<%- item.id %>" data-read-btn-el data-topic-id="<%- item.id %>"><%- __('Read') %></a>
                 <% } %>
                 </div>
             </div>
@@ -21,3 +21,33 @@
         <% }); %>
     </div>
 </div>
+
+<script>
+(function() {
+
+var readText = '<%- __('Read') %>',
+    readingText = '<%- __('Reading') %>',
+    readUrl = '<%- apiConfig.topicReadUrl %>',
+    unreadUrl = '<%- apiConfig.topicUnreadUrl %>',
+    useUrl;
+
+$('[data-read-btn-el]').on('click', function() {
+    var buttonEl = $(this);
+
+    if (buttonEl.hasClass('trust-button')) {
+        useUrl = unreadUrl;
+    } else {
+        useUrl = readUrl;
+    }
+
+    $.get(useUrl + '?id=' + buttonEl.data('topic-id'))
+        .done(function(data) {
+            buttonEl.html(buttonEl.hasClass('trust-button') ? readText: readingText);
+            buttonEl.toggleClass('trust-button');
+        });
+
+    return false;
+});
+
+})();
+</script>
