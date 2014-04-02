@@ -36,7 +36,9 @@ var containerEl = $('[data-form-container-el]'),
     contentEl = containerEl.find('[data-content-el]'),
     cuttedContentEl = containerEl.find('[data-cutted-content-el]'),
     maxLength = 255,
-    lockModify = false;
+    lockModify = false,
+    recordCreateUrl = '<%- apiConfig.recordCreateUrl %>',
+    userIndexUrl = '<%- apiConfig.userIndexUrl %>';
 
 function clearAttachment() {
   lockModify = false;
@@ -75,6 +77,16 @@ messageEl.on('keyup', function() {
   }
 
   url = $.trim(matchedUrls[0]);
+
+  containerEl.on('submit', function() {
+    var values = $(this).find(":input,:hidden").serializeObject();
+    
+    $.post(recordCreateUrl, values)
+        .done(function() {
+            location.href = userIndexUrl;
+        });
+    return false;
+  });
 
   if (urlEl.val() != url) {
     lockModify = true;
