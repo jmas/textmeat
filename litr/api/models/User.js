@@ -60,6 +60,9 @@ module.exports = {
       type: 'string',
       defaultsTo: 'Few words about me.'
     },
+    headColor: {
+      type: 'string'
+    },
 
     emailMd5: function() {
       var crypto = require('crypto');

@@ -1,5 +1,5 @@
-<div class="user-summary">
-    <div class="image" style="background-image:url(http://www.gravatar.com/avatar/<%= user ? toMd5(user.email): '' %>?d=mm);"></div>
+<div class="user-summary" <% if (user.headColor) { %> style="background-color: <%= user.headColor %>"<% } %>>
+    <div class="image" style="background-image:url(http://www.gravatar.com/avatar/<%= user ? toMd5(user.email): '' %>?d=mm);"><div></div></div>
     <div class="name"><%= user ? normalizeUserName(user) : __('I am') %></div>
     <div class="summary"><%= user && user.about ? user.about: '' %></div>
     <div class="meta">

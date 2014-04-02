@@ -21,12 +21,13 @@
   "Go to Topics": "Перейти в темы",
   "Read": "Читать",
   "Reading": "Читаю",
-  "Add new Record": "Добавить запись",
   "Add": "Добавить",
   "Save": "Сохранить",
   "Cancel": "Отмена",
   "Your Name": "Ваше имя",
   "Your E-mail": "Адрес эл. почты",
   "About yourself": "О вас",
-  "New Password (leave blank if not needed)": "Новый пароль (не обязателен)"
+  "New Password (leave blank if not needed)": "Новый пароль (не обязателен)",
+  "Head background color:": "Цвет фона заголовка:",
+  "%s readers": "%s читателей"
 }

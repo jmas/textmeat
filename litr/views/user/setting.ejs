@@ -2,22 +2,29 @@
     <form data-user-detting-form-el action="<%- apiConfig.userSettingUrl %>" class="large-form" method="post">
         <div class="field">
             <div class="element">
-                <input name="name" class="element-input" type="text" placeholder="<%- __('Your Name') %>" autofocus value="<%= model.name %>" />
+                <input name="name" class="element-input" type="text" placeholder="<%- __('Your Name') %>" autofocus value="<%= model.name ? model.name: normalizeUserName(model) %>" />
             </div>
         </div>
         <div class="field">
             <div class="element">
-                <input name="email" class="element-input" type="text" placeholder="<%- __('Your E-mail') %>" value="<%= model.email %>" />
+                <input name="email" class="element-input" type="text" placeholder="<%- __('Your E-mail') %>" value="<%= model.email ? model.email: '' %>" />
             </div>
         </div>
         <div class="field">
             <div class="element">
-                <input name="about" class="element-input" type="text" placeholder="<%- __('About yourself') %>" value="<%= model.about %>" />
+                <input name="about" class="element-input" type="text" placeholder="<%- __('About yourself') %>" value="<%= model.about ? model.about: '' %>" />
             </div>
         </div>
         <div class="field">
             <div class="element">
-                <input name="password" class="element-input" type="password" placeholder="<%- __('New Password (leave blank if not needed)') %>" />
+                <input name="password" class="element-input" type="password" placeholder="<%- __('New Password (leave blank if not needed)') %>" autocomplete="off" />
+            </div>
+        </div>
+        <div class="field">
+            <div class="element">
+                <p><%- __('Head background color:') %></p>
+                <input name="headColor" type="hidden" value="<%= model.headColor ? model.headColor: '#666666' %>" data-user-head-color-el />
+                <div data-user-head-colorpicker-el></div>
             </div>
         </div>
         <div class="control">
@@ -32,7 +39,9 @@
     
 var formEl = $('[data-user-detting-form-el]'),
     userIndexUrl = '<%- apiConfig.userIndexUrl %>',
-    userSettingUrl = '<%- apiConfig.userSettingUrl %>';
+    userSettingUrl = '<%- apiConfig.userSettingUrl %>',
+    headColorEl = formEl.find('[data-user-head-color-el]'),
+    headColorpickerEl = formEl.find('[data-user-head-colorpicker-el]');
 
 formEl.on('submit', function() {
     var values = $(this).serializeObject();
@@ -43,6 +52,8 @@ formEl.on('submit', function() {
         });
     return false;
 });
+
+headColorpickerEl.farbtastic({ callback: headColorEl, width: 150 });
 
 })();
 </script>

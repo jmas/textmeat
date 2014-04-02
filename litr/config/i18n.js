@@ -11,10 +11,10 @@
 
 module.exports.i18n = {
 
-  defaultLocale: 'ru',
+  defaultLocale: 'ua',
 
   // Which locales are supported?
-  locales: ['ru'],
+  locales: ['ru','ua'],
 
   directory: './locales',
   
