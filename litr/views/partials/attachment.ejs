@@ -1,7 +1,7 @@
 <% if (data.url) { %>
 <div class="attachment">
     <% if (data.imageUrl || data.url) { %>
-    <div class="image" style="background-image:url(<%- data.imageUrl %>);">
+    <div class="image" style="background-image:url(http://localhost/unipic/?url=<%- data.imageUrl.replace('http://', '') %>&w=75&h=75&output=jpg&t=square&q=100);">
         <%= ! data.imageUrl ? data.url.substr(7, 1): '' %>
     </div>
     <% } %>
