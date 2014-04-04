@@ -12,7 +12,7 @@
                 <a class="link" href="<%- apiConfig.recordViewUrl %>?id=<%= data.id %>" data-link="<%= data.url %>"><%- data.title %></a>
                 <% } else { %>
                 <%- data.title %><% } %>
-                <a class="shortcut-link" href="<%= data.url %>" target="_blank" data-title="<%= data.url.replace('http://', '').replace('www.', '').replace(/\/.+/, '') %>"></a>
+                <a class="shortcut-link" href="<%= data.url %>" target="_blank" data-title="<%= data.url.substring(data.url.indexOf('//') + 2).replace('www.', '').replace(/\/.+/, '') %>"></a>
             </span>
         </div>
         <div class="text">
