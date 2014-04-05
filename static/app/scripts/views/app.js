@@ -1,7 +1,7 @@
-define(['backbone'], function(Backbone) {
+define(['backbone', 'models/user'], function(Backbone, User) {
   var App = Backbone.View.extend({
     initialize: function() {
-      console.log( 'Wahoo!' );
+      console.log( 'Wahoo!', User );
     }
   });
 
