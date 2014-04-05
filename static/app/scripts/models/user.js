@@ -1,11 +1,15 @@
-define(['backbone'], function(Backbone, user) {
+define([
+  'backbone',
+  'common'
+], function(Backbone, common, moment) {
 
-var User = Backbone.Model.extend({
-	url: function() {
-		return window.app.getBaseUrl() + '/user'
-	}
-});
+  var User = Backbone.Model.extend({
+    urlRoot: common.getUrl('/user'),
+    url: function() {
+      return common.getUrl('/user/' + (this.id ? this.id: 'me'))
+    }
+  });
 
-return User;
+  return User;
 
 });

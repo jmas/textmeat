@@ -1,0 +1,1 @@
+define(["config"],function(e){return{getBaseUrl:function(){return e.baseUrl},getUrl:function(e){return this.getBaseUrl()+e}}});

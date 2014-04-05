@@ -1,0 +1,1 @@
+define(["backbone","underscore","common","models/user"],function(e,t,n,r){var i={user:new r};return t.extend(i,e.Events),i.updateState=function(e){var t=this;$.get(n.getUrl("/user/me")).done(function(n){t.user.set(n),t.trigger("change"),e&&e()})},i.isLogged=function(){return!0},i});

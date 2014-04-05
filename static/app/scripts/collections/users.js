@@ -1,13 +1,15 @@
-define(['backbone', 'models/user'], function(Backbone, User) {
+define([
+  'backbone',
+  'common',
+  'models/user'
+], function(Backbone, common, User) {
 
-var Users = Backbone.Collection.extend({
-  url: function() {
-    return window.app.getBaseUrl() + '/user'
-  },
-  model: User
+  var Users = Backbone.Collection.extend({
+    urlRoot: common.getUrl('/user'),
+    url: common.getUrl('/user'),
+    model: User
+  });
+
+  return Users;
+
 });
-
-return Users;
-
-});
-

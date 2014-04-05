@@ -72,10 +72,10 @@ module.exports = {
     toJSON: function() {
       var obj = this.toObject();
       delete obj.password;
-      delete obj.records;
-      delete obj.readers;
-      delete obj.reading;
-      delete obj.readingTopics;
+      // delete obj.records;
+      // delete obj.readers;
+      // delete obj.reading;
+      // delete obj.readingTopics;
       
       return obj;
     }
