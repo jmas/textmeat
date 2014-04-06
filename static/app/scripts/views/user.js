@@ -23,7 +23,7 @@ define([
 
       this.render();
 
-      this.model.on('change', function() {
+      this.model.on('change:id', function() {
         me.renderSummary();
         collections.userRecords.fetch({data: {user: me.model.get('id')}});
       });

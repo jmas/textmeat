@@ -4,16 +4,63 @@ require.config({
     'underscore': 'vendor/underscore-amd/underscore',
     'backbone':   'vendor/backbone-amd/backbone',
     'text':       'vendor/requirejs-text/text',
-    'moment':     'vendor/momentjs/moment'
+    'moment':     'vendor/momentjs/moment',
+    'nprogress':     'vendor/nprogress/nprogress'
   },
   urlArgs: "bust=" + (new Date()).getTime()
 });
 
 require([
+  'backbone',
+  'jquery',
   'auth',
   'router',
-  'views/app'
-], function(auth, router, AppView) {
+  'views/app',
+  'nprogress'
+], function(Backbone, $, auth, router, AppView, NProgress) {
+  Backbone.ajax = $.ajax;
+
+  NProgress.configure({ showSpinner: false });
+
+  // var finishLoadingTimer;
+  var isLoaderStarted = false;
+  var countAjaxs = 0;
+  var tryFinishLoading = function() {
+    if (! isLoaderStarted) {
+      NProgress.start();
+      isLoaderStarted = true;
+    }
+
+    if (countAjaxs > 0) { 
+      NProgress.set(1 / countAjaxs);
+    } else {
+      NProgress.done();
+      isLoaderStarted = false;
+    }
+    
+    // clearTimeout(finishLoadingTimer);
+    // setTimeout(function() {
+    //   NProgress.done();
+    //   isLoaderStarted = false;
+    //   console.log('done');
+    // }, 400);
+  };
+
+  $(document).ajaxStart(function() {
+    countAjaxs++;
+    tryFinishLoading();
+  });
+
+  $(document).ajaxStop(function() {
+    countAjaxs--;
+    tryFinishLoading();
+  });
+
+  // NProgress.start();
+  // NProgress.set(0.4);
+  // $(document).on('page:fetch',   function() { NProgress.start(); });
+  // $(document).on('page:change',  function() { NProgress.done(); });
+  // $(document).on('page:restore', function() { NProgress.remove(); });
 
   window.appView = new AppView;
 
