@@ -117,8 +117,6 @@ module.exports = {
                 });
             });
 
-            console.log('newTopics:', newTopics);
-
             // Topic
             //   .findOrCreate(newTopics, newTopics)
             //   .done(function(err, models) {

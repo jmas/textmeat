@@ -5,6 +5,9 @@
     "requirejs": "latest",
     "jquery": "latest",
     "backbone-amd": "latest",
-    "underscore-amd": "latest"
+    "underscore-amd": "latest",
+    "requirejs-text": "latest",
+    "momentjs": "latest",
+    "nprogress": "latest"
   }
 }

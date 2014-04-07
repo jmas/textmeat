@@ -69,6 +69,12 @@ module.exports = {
       return crypto.createHash('md5').update(this.email).digest('hex');
     },
 
+    cryptedEmail: function() {
+      var xorcrypt = require('xorcrypt/xorcrypt');
+      var b = new Buffer(xorcrypt.crypt(this.email, sails.config.uniav.cryptKey));
+      return b.toString('base64');
+    },
+
     toJSON: function() {
       var obj = this.toObject();
       delete obj.password;
