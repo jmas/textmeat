@@ -25,6 +25,9 @@ module.exports = {
       type: 'string',
       required: true
     },
+    about: {
+      type: 'string'
+    },
     readersCount: {
       type: 'integer',
       defaultsTo: '0'

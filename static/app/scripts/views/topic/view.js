@@ -24,8 +24,11 @@ define([
       this.render();
 
       this.model.on('change:id', function() {
-        me.renderSummary();
         me.collection.fetch();
+      });
+
+      this.model.on('change', function() {
+        me.renderSummary();
       });
 
        this.collection.on('sync', function() {
@@ -33,7 +36,8 @@ define([
       });
 
       router.on('route:topicView', function(id) {
-        if (id) {
+        if (id && (! me.model.get('id') || me.model.get('id') != id)) {
+          me.model.clear();
           me.model.set({ id: id });
           me.model.fetch();
         }

@@ -36,6 +36,7 @@ define([
         id = id || auth.user.get('id');
 
         if (! me.model.get('id') || me.model.get('id') != id) {
+          me.model.clear();
           me.model.set({ id: id });
           me.model.fetch();
         }

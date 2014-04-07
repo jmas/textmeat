@@ -19,6 +19,7 @@ define([
       collections.records.on('add', function(model) {
         me.addOne(model);
       });
+      
       collections.records.fetch();
     },
 
