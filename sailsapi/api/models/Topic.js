@@ -32,6 +32,14 @@ module.exports = {
     recordsCount: {
       type: 'integer',
       defaultsTo: '0'
+    },
+
+    toJSON: function() {
+      var obj = this.toObject();
+      delete obj.readers;
+      delete obj.records;
+      
+      return obj;
     }
   }
 

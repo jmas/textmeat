@@ -1,1 +1,1 @@
-define(["collections/users","collections/records"],function(e,t){var n={users:new e,records:new t};return n});
+define(["collections/users","collections/records","collections/topics"],function(e,t,n){var r={records:new t,userRecords:new t,topics:new n};return r});

@@ -1,14 +1,20 @@
 <div class="item">
+  <% if (model.get('user')) { %>
   <div class="user">
-    <span class="image" style="background-image:url();"></span>
-    <span class="name"><a href="#user/1">UserName</a></span>
+    <span class="image" style="background-image:uzrl();"></span>
+    <span class="name"><a href="#user/<%= model.get('user').id %>"><%= model.get('user').name %></a></span>
   </div>
+  <% } %>
+  <% if (model.get('message')) { %>
   <div class="record">
     <div class="summary">
-      summary
+      <%= model.get('message') %>
     </div>
   </div>
+  <% } %>
+  <% if (model.get('createdAt')) { %>
   <div class="meta">
-    <span class="date">date</span>
+    <span class="date"><%= model.createdAtFromNow() %></span>
   </div>
+  <% } %>
 </div>

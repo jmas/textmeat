@@ -2,7 +2,7 @@ define([
   'backbone',
   'underscore',
   'jquery',
-  'text!templates/topic/index.html'
+  'text!templates/partials/topic-item.html'
 ], function(Backbone, _, $, tpl) {
   
   var View = Backbone.View.extend({
@@ -13,7 +13,7 @@ define([
     },
 
     render: function() {
-      this.$el.html(this.template());
+      this.$el.html(this.template({model: this.model}));
     },
 
     show: function() {

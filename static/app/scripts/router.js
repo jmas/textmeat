@@ -10,7 +10,7 @@ define([
       'record':     'record',
       'record/:id': 'record',
       'topic':      'topic',
-      'topic/:id':  'topic'
+      'topic/:id':  'topicView'
     }
   });
 

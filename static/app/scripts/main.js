@@ -5,7 +5,7 @@ require.config({
     'backbone':   'vendor/backbone-amd/backbone',
     'text':       'vendor/requirejs-text/text',
     'moment':     'vendor/momentjs/moment',
-    'nprogress':     'vendor/nprogress/nprogress'
+    'nprogress':  'vendor/nprogress/nprogress'
   },
   urlArgs: "bust=" + (new Date()).getTime()
 });

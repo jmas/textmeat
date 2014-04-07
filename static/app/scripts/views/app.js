@@ -7,9 +7,10 @@ define([
   'views/home',
   'views/user',
   'views/record',
-  'views/topic',
+  'views/topic/index',
+  'views/topic/view',
   'text!templates/app.html'
-], function(Backbone, _, $, auth, User, HomeView, UserView, RecordView, TopicView, appTpl) {
+], function(Backbone, _, $, auth, User, HomeView, UserView, RecordView, TopicIndexView, TopicView, appTpl) {
 
   var App = Backbone.View.extend({
     el: $('#appView'),
@@ -34,10 +35,11 @@ define([
     render: function() {
       this.$el.html(this.template());
 
-      this.pages.home = new HomeView({ el: $('#homeView') });
-      this.pages.user = new UserView({ el: $('#userView') });
-      this.pages.record = new RecordView({ el: $('#recordView') });
-      this.pages.topic = new TopicView({ el: $('#topicView') });
+      this.pages.home = new HomeView({ el: $('#homePage') });
+      this.pages.user = new UserView({ el: $('#userPage') });
+      this.pages.record = new RecordView({ el: $('#recordPage') });
+      this.pages.topic = new TopicIndexView({ el: $('#topicPage') });
+      this.pages.topicView = new TopicView({ el: $('#topicViewPage') });
 
       this.navEl = this.$el.find('#appNav');
       this.navUserBtn = this.$el.find('#appNavUserBtn');

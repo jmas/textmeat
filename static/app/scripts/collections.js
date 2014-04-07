@@ -1,11 +1,14 @@
 define([
   'collections/users',
   'collections/records',
-], function(Users, Records) {
+  'collections/topics'
+], function(Users, Records, Topics) {
 
   var Collections = {
     records: new Records,
-    userRecords: new Records
+    userRecords: new Records,
+    topics: new Topics,
+    topicRecords: new Records,
   };
 
   return Collections;
