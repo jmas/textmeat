@@ -1,18 +1,23 @@
 require.config({
   paths: {
-    'underscore': 'vendor/underscore-amd/underscore',
-    'backbone':   'vendor/backbone-amd/backbone',
-    'text':       'vendor/requirejs-text/text',
-    'moment':     'vendor/momentjs/moment',
-    'nprogress':  'vendor/nprogress/nprogress',
-    'jquery':     'vendor/jquery/dist/jquery',
-    'jqueryui':   'vendor/jqueryui/ui/minified/jquery-ui.min'
+    'underscore':      'vendor/underscore-amd/underscore',
+    'backbone':        'vendor/backbone-amd/backbone',
+    'text':            'vendor/requirejs-text/text',
+    'moment':          'vendor/momentjs/moment',
+    'nprogress':       'vendor/nprogress/nprogress',
+    'jquery':          'vendor/jquery/dist/jquery',
+    'jqueryui':        'vendor/jqueryui/ui/minified/jquery-ui.min',
+    'jquery-debounce': 'vendor/bower-jquery-debounce/jquery.debounce'
   },
   shim: {
-    jquery: {
+    'jquery': {
       exports: '$'
     },
-    jqueryui: {
+    'jqueryui': {
+      deps: ['jquery'],
+      exports: '$'
+    },
+    'jquery-debounce': {
       deps: ['jquery'],
       exports: '$'
     }
@@ -22,12 +27,16 @@ require.config({
 
 require([
   'backbone',
+  'underscore',
   'jquery',
   'auth',
   'router',
   'views/app',
-  'nprogress'
-], function(Backbone, $, auth, router, AppView, NProgress) {
+  'nprogress',
+  'helpers'
+], function(Backbone, _, $, auth, router, AppView, NProgress, helpers) {
+  _.helpers = helpers;
+
   Backbone.ajax = $.ajax;
 
   NProgress.configure({ showSpinner: false });

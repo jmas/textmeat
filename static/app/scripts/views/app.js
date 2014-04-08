@@ -69,6 +69,7 @@ define([
           item.$el.css('opacity', 0).show().animate({
             opacity: 1
           }, 100);
+          
           me.navEl.find('[data-item="' + key + '"]').addClass('active');
 
           $('html,body').animate({

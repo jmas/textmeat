@@ -9,6 +9,7 @@
     "underscore-amd": "latest",
     "requirejs-text": "latest",
     "momentjs": "latest",
-    "nprogress": "latest"
+    "nprogress": "latest",
+    "bower-jquery-debounce": "https://github.com/jmas/bower-jquery-debounce.git"
   }
 }

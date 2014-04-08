@@ -8,10 +8,11 @@
   <% if (model.get('message')) { %>
   <div class="record">
     <div class="summary">
-      <%= model.get('message') %>
+      <%= _.helpers.makeLinks(model.get('message')) %>
     </div>
   </div>
   <% } %>
+  <div data-attachment-el></div>
   <% if (model.get('createdAt')) { %>
   <div class="meta">
     <span class="date"><%= model.createdAtFromNow() %></span>

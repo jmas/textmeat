@@ -20,7 +20,12 @@ define([
       this.collection.on('sync', function() {
         me.addAll(me.collection.models);
       });
-      this.collection.fetch();
+
+      this.collection.fetch({
+        data: {
+          limit: 30
+        }
+      });
     },
 
     render: function() {

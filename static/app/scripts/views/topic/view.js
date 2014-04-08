@@ -24,7 +24,11 @@ define([
       this.render();
 
       this.model.on('change:id', function() {
-        me.collection.fetch();
+        me.collection.fetch({
+          data: {
+            limit: 15
+          }
+        });
       });
 
       this.model.on('change', function() {

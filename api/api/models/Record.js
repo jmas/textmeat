@@ -17,7 +17,8 @@ module.exports = {
   attributes: {
     // associations
     user: {
-      model: 'user'
+      model: 'user',
+      index: true
     },
     topics: {
       collection: 'topic',
@@ -43,30 +44,15 @@ module.exports = {
     cuttedContent: {
       type: 'string'
     },
-    createdAt: 'datetime'
-    // cuttedContent: function() {
-    //   var cuttedContent,
-    //       maxLength = 255;
+    createdAt: 'datetime',
 
-    //   if (this.content.length > 0) { 
-    //     cuttedContent = this.content.replace(/(<([^>]+)>)/ig, '').substr(0, maxLength);
-
-    //     //re-trim if we are in the middle of a word
-    //     cuttedContent = cuttedContent.substr(0, Math.min(cuttedContent.length, cuttedContent.lastIndexOf(" ")));
-    //     return cuttedContent + '&hellip;';
-    //   } else {
-    //     return '';
-    //   }
-    // }
+    toJSON: function() {
+      var obj = this.toObject();
+      delete obj.content;
+      
+      return obj;
+    }
   },
-
-  // beforeValidation: function(attrs, next) {
-  //   if (! attrs.url || (! attrs.title && ! attrs.content)) {
-  //     return next('url or title, content should be present');
-  //   }
-
-  //   return next();
-  // },
 
   afterCreate: function(values, cb) {
     var topics,
@@ -117,24 +103,6 @@ module.exports = {
                   }
                 });
             });
-
-            // Topic
-            //   .findOrCreate(newTopics, newTopics)
-            //   .done(function(err, models) {
-            //     if (err) { return; }
-
-            //     _.each(models, function(model) {
-            //       console.log('topic err, model:', model);
-            //       if (err) { return; }
-
-            //       model.recordsCount = model.recordsCount || 0;
-            //       model.recordsCount++;
-
-            //       console.log('new topic: ', model);
-
-            //       model.save();
-            //     });
-            //   });
           }
         }
       });
@@ -142,13 +110,9 @@ module.exports = {
     cb();
   },
 
-  // beforeUpdate: function() {
-  //   return fillContentHtml.apply(this, arguments);
-  // }
-
   _config: {
     populate: {
-        user: true
+      user: true
     }
   }
 };

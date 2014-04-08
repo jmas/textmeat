@@ -1,0 +1,23 @@
+<% if (model.get('url')) { %>
+<div class="attachment">
+    <% if (model.get('imageUrl') || model.get('url')) { %>
+    <div class="image" style="background-image:url(http://localhost/unipic/?url=<%- model.get('imageUrl') ? model.get('imageUrl').replace('http://', ''): '' %>&w=75&h=75&output=jpg&t=square&q=100);">
+        <%= ! model.get('imageUrl') ? model.get('url').substr(7, 1): '' %>
+    </div>
+    <% } %>
+    <div class="summary">
+        <div class="title">
+            <span class="inside">
+                <% if (model.get('id')) { %>
+                <a class="link" href="#record/view/<%= model.get('id') %>" data-link="<%= model.get('url') %>"><%= model.get('title') %></a>
+                <% } else { %>
+                <%= model.get('title') %><% } %>
+                <a class="shortcut-link" href="<%= model.get('url') %>" target="_blank" data-title="<%= model.get('url').substring(model.get('url').indexOf('//') + 2).replace('www.', '').replace(/\/.+/, '') %>"></a>
+            </span>
+        </div>
+        <div class="text">
+            <%= model.get('cuttedContent') %>
+        </div>
+    </div>
+</div>
+<% } %>

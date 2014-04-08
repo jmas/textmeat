@@ -1,6 +1,6 @@
 define(function() {
   return {
-    baseUrl: 'http://localhost:1337',
+    baseUrl: 'http://192.168.0.60:1337',
     uniavUrl: 'http://uniav.unibook.info/'
   };
 });

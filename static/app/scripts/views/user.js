@@ -26,7 +26,12 @@ define([
       this.model.on('change', function() {
         me.renderSummary();
         // collections.userRecords.reset();
-        collections.userRecords.fetch({data: {user: me.model.get('id')}});
+        collections.userRecords.fetch({
+          data: {
+            user: me.model.get('id'),
+            limit: 15
+          }
+        });
       });
 
       collections.userRecords.on('sync', function() {
