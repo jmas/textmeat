@@ -23,19 +23,21 @@ define([
 
       this.render();
 
-      this.model.on('change:id', function() {
+      this.model.on('change', function() {
         me.renderSummary();
+        // collections.userRecords.reset();
         collections.userRecords.fetch({data: {user: me.model.get('id')}});
       });
 
       collections.userRecords.on('sync', function() {
-        me.addRecords(collections.userRecords.models);
+        me.renderRecords();
       });
 
       router.on('route:user', function(id) {
         id = id || auth.user.get('id');
 
         if (! me.model.get('id') || me.model.get('id') != id) {
+          me.clear();
           me.model.clear();
           me.model.set({ id: id });
           me.model.fetch();
@@ -54,11 +56,11 @@ define([
       this.summaryEl.html(this.summaryTpl({ model: this.model }));
     },
 
-    addRecords: function(models) {
+    renderRecords: function() {
       var me=this;
 
       this.recordsListEl.html('');
-      _.map(models, function(item) {
+      _.map(collections.userRecords.models, function(item) {
         me.addOneRecord(item);
       });
     },
@@ -68,6 +70,12 @@ define([
       view.render();
 
       this.recordsListEl.append(view.$el);
+    },
+
+    clear: function()
+    {
+      this.summaryEl.html('');
+      this.recordsListEl.html('');
     },
 
     show: function() {

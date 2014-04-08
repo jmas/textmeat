@@ -7,6 +7,7 @@
   "dependencies": {
     "sails": "git://github.com/balderdashy/sails.git#v0.10",
     "sails-disk": "git://github.com/balderdashy/sails-disk.git#v0.10",
+    "sails-mongo": "git://github.com/balderdashy/sails-mongo.git#v0.10",
     "rc": "~0.3.3",
     "include-all": "~0.1.2",
     "ejs": "~0.8.4",

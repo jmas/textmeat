@@ -37,6 +37,10 @@ define([
         me.navUserBtn.html(this.get('name'));
       });
 
+      $('html,body').on('scroll', function() {
+        $(this).stop();
+      });
+
       this.userModel.fetch();
     },
 
@@ -62,8 +66,14 @@ define([
 
       _.map(this.pages, function(item, key) {
         if (id == key) {
-          item.show();
+          item.$el.css('opacity', 0).show().animate({
+            opacity: 1
+          }, 100);
           me.navEl.find('[data-item="' + key + '"]').addClass('active');
+
+          $('html,body').animate({
+            scrollTop: 0
+          }, 100);
         }
       });
     },
@@ -72,7 +82,9 @@ define([
       this.navEl.find('[data-item]').removeClass('active');
 
       _.map(this.pages, function(item) {
-        item.hide();
+        if (item.$el.is(':visible')) {
+          item.hide();
+        }
       });
     },
 
@@ -82,8 +94,10 @@ define([
       model.set('user', auth.user.get('id'));
 
       model.on('sync', function() {
-        collections.userRecords.add([ model ]);
-        collections.userRecords.fetch();
+        // collections.userRecords.reset();
+        // collections.userRecords.add([ model ]);
+        collections.userRecords.fetch({ data: { user: auth.user.get('id') } });
+        // collections.records.reset();
         collections.records.fetch();
       });
 

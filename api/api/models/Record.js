@@ -42,7 +42,8 @@ module.exports = {
     },
     cuttedContent: {
       type: 'string'
-    }
+    },
+    createdAt: 'datetime'
     // cuttedContent: function() {
     //   var cuttedContent,
     //       maxLength = 255;

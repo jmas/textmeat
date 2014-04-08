@@ -39,6 +39,9 @@ module.exports = {
       unique: true,
       required: true
     },
+    cryptedEmail: {
+      type: 'string'
+    },
     password: {
       type: 'string',
       required: true,
@@ -69,15 +72,10 @@ module.exports = {
       return crypto.createHash('md5').update(this.email).digest('hex');
     },
 
-    cryptedEmail: function() {
-      var xorcrypt = require('xorcrypt/xorcrypt');
-      var b = new Buffer(xorcrypt.crypt(this.email, sails.config.uniav.cryptKey));
-      return b.toString('base64');
-    },
-
     toJSON: function() {
       var obj = this.toObject();
       delete obj.password;
+      delete obj.email;
       // delete obj.records;
       // delete obj.readers;
       // delete obj.reading;
@@ -89,6 +87,10 @@ module.exports = {
 
   beforeCreate: function (attrs, next) {
     var bcrypt = require('bcrypt');
+
+    var xorcrypt = require('xorcrypt/xorcrypt');
+    var b = new Buffer(xorcrypt.crypt(attrs.email, sails.config.uniav.cryptKey));
+    attrs.cryptedEmail =  b.toString('base64');
 
     bcrypt.genSalt(10, function(err, salt) {
       if (err) return next(err);
@@ -103,6 +105,10 @@ module.exports = {
   },
 
   beforeUpdate: function(attrs, next) {
+    var xorcrypt = require('xorcrypt/xorcrypt');
+    var b = new Buffer(xorcrypt.crypt(attrs.email, sails.config.uniav.cryptKey));
+    attrs.cryptedEmail =  b.toString('base64');
+
     if (attrs.password) {
       var bcrypt = require('bcrypt');
 
