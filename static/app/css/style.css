@@ -1,1 +1,4 @@
+@import "../scripts/vendor/jqueryui/themes/base/jquery-ui.css";
+@import "../scripts/vendor/nprogress/nprogress.css";
+@import "app.css";
 /* Feel free to use @import. r.js will merge them, when building */

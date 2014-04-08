@@ -4,6 +4,7 @@
   "dependencies": {
     "requirejs": "latest",
     "jquery": "latest",
+    "jqueryui": "latest",
     "backbone-amd": "latest",
     "underscore-amd": "latest",
     "requirejs-text": "latest",

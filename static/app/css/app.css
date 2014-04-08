@@ -320,6 +320,7 @@ body.simple-page {
             }            
         }
     }*/
+
 }
 .feed-list .item {
   background: #fff;
@@ -341,6 +342,7 @@ body.simple-page {
                 }
             }
         }*/
+
   /*.summary {
             margin-bottom: 15px;
             color: #666666;
@@ -351,12 +353,14 @@ body.simple-page {
                 color:#666666;
             }
         }*/
+
 }
 .feed-list .item a {
   color: #b7b7b7;
   /*&:hover {
                 color: #666666;
             }*/
+
 }
 .feed-list .item .attachment a {
   color: #6fa8dc;
@@ -392,7 +396,9 @@ body.simple-page {
   color: #666666;
   display: inline;
   /*background: #D8D8D8;*/
+
   /*color: #fff;*/
+
   border-radius: 3px;
   padding: 0 3px;
   line-height: 1.2em;
@@ -401,6 +407,7 @@ body.simple-page {
                         color: #6fa8dc;
                         border-color: #6fa8dc;
                     }*/
+
 }
 .feed-list .item:hover {
   transition: .3s;
@@ -409,6 +416,7 @@ body.simple-page {
                     background: #6fa8dc;
                 }
             }*/
+
 }
 .feed-list .item:hover .summary {
   color: #434343;
@@ -528,6 +536,7 @@ body.simple-page {
   background-position: center;
   background-size: cover 110%;
   /*border: 1px solid #fff;*/
+
 }
 .user-summary .image div {
   border: 2px solid #fff;
@@ -695,6 +704,7 @@ body.simple-page {
 }
 .add-form-container {
   /*padding: 15px;*/
+
 }
 .add-form-container .attachment-container {
   margin-bottom: 10px;
@@ -703,6 +713,7 @@ body.simple-page {
   border-style: solid;
   padding: 15px 0 0 0;
   /*border-radius: 3px;*/
+
   display: none;
 }
 .add-form-container .attachment-container .spinner {
@@ -720,6 +731,7 @@ body.simple-page {
             font-size: 1em;
         }
     }*/
+
 }
 .form .field {
   margin-bottom: 10px;
@@ -932,4 +944,24 @@ body.simple-page {
 .large-form .control button,
 .large-form .control a {
   font-size: 1.5em;
+}
+/**
+ * jQuery UI styles
+ */
+.ui-dialog .ui-widget-header {
+  border: none;
+  background: none;
+  border-bottom: 1px solid #eee;
+}
+.ui-dialog.ui-widget-content {
+  border: none;
+  border-radius: 3px;
+}
+.ui-widget-content .ui-state-default {
+  background: #6fa8dc;
+  border: none;
+  color: #fff;
+}
+.ui-widget-content .ui-state-active {
+  background: #6fa8dc;
 }

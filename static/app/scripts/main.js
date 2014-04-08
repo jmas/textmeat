@@ -1,11 +1,21 @@
 require.config({
   paths: {
-    'jquery':     'vendor/jquery/dist/jquery',
     'underscore': 'vendor/underscore-amd/underscore',
     'backbone':   'vendor/backbone-amd/backbone',
     'text':       'vendor/requirejs-text/text',
     'moment':     'vendor/momentjs/moment',
-    'nprogress':  'vendor/nprogress/nprogress'
+    'nprogress':  'vendor/nprogress/nprogress',
+    'jquery':     'vendor/jquery/dist/jquery',
+    'jqueryui':   'vendor/jqueryui/ui/minified/jquery-ui.min'
+  },
+  shim: {
+    jquery: {
+      exports: '$'
+    },
+    jqueryui: {
+      deps: ['jquery'],
+      exports: '$'
+    }
   },
   urlArgs: "bust=" + (new Date()).getTime()
 });

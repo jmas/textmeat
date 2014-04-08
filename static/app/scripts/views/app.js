@@ -3,14 +3,17 @@ define([
   'underscore',
   'jquery',
   'auth',
+  'collections',
   'models/user',
+  'models/record',
   'views/home',
   'views/user',
   'views/record',
   'views/topic/index',
   'views/topic/view',
+  'views/partials/record-form',
   'text!templates/app.html'
-], function(Backbone, _, $, auth, User, HomeView, UserView, RecordView, TopicIndexView, TopicView, appTpl) {
+], function(Backbone, _, $, auth, collections, User, Record, HomeView, UserView, RecordView, TopicIndexView, TopicView, RecordFormView, appTpl) {
 
   var App = Backbone.View.extend({
     el: $('#appView'),
@@ -19,6 +22,11 @@ define([
     template: _.template(appTpl),
     pages: {},
     userModel: new User,
+    recordForm: null,
+
+    events: {
+      'click #appNavAddBtn': 'openAddDialog'
+    },
 
     initialize: function() {
       var me=this;
@@ -66,6 +74,22 @@ define([
       _.map(this.pages, function(item) {
         item.hide();
       });
+    },
+
+    openAddDialog: function() {
+      var model = new Record;
+
+      model.set('user', auth.user.get('id'));
+
+      model.on('sync', function() {
+        collections.userRecords.add([ model ]);
+        collections.userRecords.fetch();
+        collections.records.fetch();
+      });
+
+      this.recordForm = new RecordFormView({ model: model });
+      this.recordForm.show();
+      return false;
     }
   });
 

@@ -6,6 +6,7 @@ define([
 ], function(Backbone, _, $, tpl) {
   
   var View = Backbone.View.extend({
+    model: null,
     template: _.template(tpl),
 
     initialize: function() {
