@@ -1,1 +1,0 @@
-define(["backbone","underscore","common","models/user"],function(e,t,n,r){var i={user:new r};return t.extend(i,e.Events),i.init=function(){var e=this;e.user.on("change",function(){e.trigger("change")})},i.update=function(e){this.user.fetch()},i.isLogged=function(){return!0},i.init(),i});
