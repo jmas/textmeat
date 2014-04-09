@@ -1,7 +1,7 @@
 <div class="item">
   <% if (model.get('user')) { %>
   <div class="user">
-    <span class="image" style="background-image:uzrl();"></span>
+    <span class="image" style="background-image:url(<%= _.config.uniavUrl %>/<%= model.get('user').cryptedEmail %>);"></span>
     <span class="name"><a href="#user/<%= model.get('user').id %>"><%= model.get('user').name %></a></span>
   </div>
   <% } %>

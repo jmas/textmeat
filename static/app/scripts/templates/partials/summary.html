@@ -1,6 +1,5 @@
-<div class="user-summary">
-    <!-- http://uniav.unibook.info/D1xREiQaUldQXBpPR0w= -->
-    <div class="image" style="background-image:url();"><div></div></div>
+<div class="user-summary"><% console.log(model.attributes) %>
+    <div class="image" style="background-image:url(<%= _.config.uniavUrl %>/<%= model.get('cryptedEmail') %>);"><div></div></div>
     <div class="name"><%= model.get('name') %></div>
     <div class="summary"><%= model.get('about') %></div>
     <div class="meta">

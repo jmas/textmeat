@@ -44,7 +44,7 @@ define([
         if (! me.model.get('id') || me.model.get('id') != id) {
           me.clear();
           me.model.clear();
-          me.model.set({ id: id });
+          me.model.set('id', id);
           me.model.fetch();
         }
       });

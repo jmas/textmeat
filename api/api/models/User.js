@@ -106,9 +106,12 @@ module.exports = {
 
   beforeUpdate: function(attrs, next) {
     var xorcrypt = require('xorcrypt/xorcrypt');
-    var b = new Buffer(xorcrypt.crypt(attrs.email, sails.config.uniav.cryptKey));
-    attrs.cryptedEmail =  b.toString('base64');
 
+    if (attrs.email) {
+      var b = new Buffer(xorcrypt.crypt(attrs.email, sails.config.uniav.cryptKey));
+      attrs.cryptedEmail =  b.toString('base64');
+    }
+    
     if (attrs.password) {
       var bcrypt = require('bcrypt');
 

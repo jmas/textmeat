@@ -31,11 +31,13 @@ require([
   'jquery',
   'auth',
   'router',
+  'config',
   'views/app',
   'nprogress',
   'helpers'
-], function(Backbone, _, $, auth, router, AppView, NProgress, helpers) {
+], function(Backbone, _, $, auth, router, config, AppView, NProgress, helpers) {
   _.helpers = helpers;
+  _.config = config;
 
   Backbone.ajax = $.ajax;
 

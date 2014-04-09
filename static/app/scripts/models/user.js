@@ -4,9 +4,9 @@ define([
 ], function(Backbone, common, moment) {
 
   var User = Backbone.Model.extend({
-    urlRoot: common.getUrl('/user'),
+    // urlRoot: common.getUrl('/user'),
     url: function() {
-      return common.getUrl('/user/' + (this.id ? this.id: 'me'))
+      return common.getUrl('/user/' + (this.get('id') ? this.get('id'): 'me'))
     }
   });
 
