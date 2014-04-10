@@ -2,11 +2,12 @@ define([
   'backbone',
   'underscore',
   'jquery',
+  'common',
   'collections',
   'views/partials/record-item',
   'text!templates/record/index.html',
   'jquery-debounce'
-], function(Backbone, _, $, collections, RecordItemView, tpl) {
+], function(Backbone, _, $, common, collections, RecordItemView, tpl) {
   
   var View = Backbone.View.extend({
     template: _.template(tpl),
@@ -27,6 +28,7 @@ define([
       
       this.isLoading = true;
       collections.records.fetch({
+        url: common.getUrl('/record/reading'),
         data: {
           limit: this.limit
         }
@@ -53,6 +55,7 @@ define([
             me.isLoading = true;
 
             collections.records.fetch({
+              url: common.getUrl('/record/reading'),
               data: {
                 limit: me.limit,
                 skip: me.currentPage * me.limit

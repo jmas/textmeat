@@ -58,7 +58,10 @@ define([
     },
 
     renderSummary: function() {
-      this.summaryEl.html(this.summaryTpl({ model: this.model }));
+      this.summaryEl.html(this.summaryTpl({
+        isAuthUser: this.model.get('id') == auth.user.get('id'),
+        model: this.model
+      }));
     },
 
     renderRecords: function() {

@@ -8,7 +8,7 @@
   <% if (model.get('message')) { %>
   <div class="record">
     <div class="summary">
-      <%= _.helpers.makeLinks(model.get('message')) %>
+      <%= _.helpers.makeTags(_.helpers.makeLinks(model.get('message'))) %>
     </div>
   </div>
   <% } %>

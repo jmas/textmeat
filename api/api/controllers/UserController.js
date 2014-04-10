@@ -7,12 +7,29 @@
 
 module.exports = {
   me: function(req, res) {
-    User.findOne({ email: 'jmas@yandex.ru' }).exec(function(err, model) {
-      if (err) { return res.json({ error: err }, 500); }
-      if (! model) { return res.json({ error: 'not found' }, 404); }
-      
-      res.json(model);
-    });
+    var find,
+        params = req.params.all();
+
+      find = User
+      .findOne({
+        email: 'jmas@yandex.ru'
+      });
+
+    if (params.populate instanceof Array) {
+      params.populate.forEach(function(item) {
+        find.populate(item.toString());
+      });
+
+      delete params.populate;
+    }
+
+    find
+      .exec(function(err, model) {
+        if (err) { return res.json({ error: err }, 500); }
+        if (! model) { return res.json({ error: 'not found' }, 404); }
+        
+        res.json(model);
+      });
   },
 
   find: function(req, res) {
@@ -31,6 +48,14 @@ module.exports = {
     } else {
       find = User
         .find();
+    }
+
+    if (params.populate instanceof Array) {
+      params.populate.forEach(function(item) {
+        find.populate(item.toString());
+      });
+
+      delete params.populate;
     }
 
     find

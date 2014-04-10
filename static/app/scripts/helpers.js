@@ -42,7 +42,13 @@ return {
   makeLinks: function(str, l) {
     var me=this;
     return str.replace(/(\b(((https?|ftp|file):\/\/)|www\.)[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig, function(url) {
-      return '<a href="' + url + '" target="_blank">' + me.shortUrl(url, l) + '</a>';
+      return '<a href="' + url + '" target="_blank">' + me.shortUrl(url, l).replace(/\/$/, '') + '</a>';
+    });
+  },
+
+  makeTags: function(str) {
+    return str.replace(/\#[A-Za-zА-Яа-я0-9\-\_]+/ig, function(t) {
+      return '<a class="topic" href="#topic/view/' + t.substring(1) + '">' + t.substring(1) + '</a>'
     });
   }
 

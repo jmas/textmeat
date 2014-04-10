@@ -32,7 +32,7 @@ define([
       });
 
       this.model.on('change', function() {
-        me.renderSummary();
+        // me.renderSummary();
       });
 
        this.collection.on('sync', function() {
@@ -49,7 +49,6 @@ define([
     },
 
     renderSummary: function() {
-      console.log(this.summaryEl);
       this.summaryEl.html(this.summaryTpl({ model: this.model }));
     },
 

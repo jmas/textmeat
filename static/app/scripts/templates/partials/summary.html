@@ -1,25 +1,29 @@
-<div class="user-summary"><% console.log(model.attributes) %>
+<div class="user-summary">
     <div class="image" style="background-image:url(<%= _.config.uniavUrl %>/<%= model.get('cryptedEmail') %>);"><div></div></div>
-    <div class="name"><%= model.get('name') %></div>
-    <div class="summary"><%= model.get('about') %></div>
+    <div class="name"><%= model.get('name') || 'Unnamed' %></div>
+    <div class="summary"><%= model.get('about') || 'Some text about.' %></div>
     <div class="meta">
         <div class="stat">
             <div class="item">
                 <div class="title">My Records</div>
-                <div class="count">0</div>
+                <div class="count"><%= model.get('recordsCount') || '0' %></div>
             </div>
             <div class="item">
                 <div class="title">My Readers</div>
-                <div class="count">0</div>
+                <div class="count"><%= model.get('readersCount') || '0' %></div>
             </div>
             <div class="item">
                 <div class="title">I reading</div>
-                <div class="count">0</div>
+                <div class="count"><%= model.get('readingCount') || '0' %></div>
             </div>
         </div>
         <div class="control">
+            <% if (isAuthUser) { %>
             <a class="button simple-button" href="/user/setting">Settings</a>
             <a class="button simple-button" href="/user/logout">Logout</a>
+            <% } else { %>
+            <a class="button" href="#" data-read-btn-el>Read</a>
+            <% } %>
         </div>
     </div>
 </div>
