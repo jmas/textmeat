@@ -6,6 +6,7 @@
  */
 
 module.exports = {
+  
   find: function(req, res) {
     var params = req.params.all();
 
@@ -33,7 +34,7 @@ module.exports = {
     }
 
     find
-      .sort({ 'createdAt': 'desc' })
+      .sort({ 'createdAt': -1 })
       .exec(function(err, models) {
         if (err) { return res.json({ error: err.toString() }, 500); }
 
@@ -42,8 +43,10 @@ module.exports = {
   },
 
   reading: function(req, res) {
-    var find = Record
-      .find();
+    var find,
+      readingUsers = [];
+
+    find = Record.find();
 
     if (req.query.limit) {
       find = find.limit(req.query.limit);
@@ -53,12 +56,26 @@ module.exports = {
       find = find.skip(req.query.skip);
     }
 
+    console.log(req.sessionUser);
+
+    // req.sessionUser.populate('reading').exec(function() {
+    //   console.log('success');
+    // });
+
+    // req.sessionUser.reading.forEach(function(model) {
+    //   console.log(model);
+
+    //   //readingUsers.push(model.id);
+    // });
+
+    // console.log(readingUsers);
+
     find
       .where({
         user: ['532b5ea60555250b22b08fef']
       })
       .populate('user')
-      .sort({ 'createdAt': 'desc' })
+      .sort({ 'createdAt': -1 })
       .exec(function(err, models) {
         if (err) { return res.json({ error: err.toString() }, 500); }
 

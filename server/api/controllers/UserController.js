@@ -12,7 +12,7 @@ module.exports = {
 
       find = User
       .findOne({
-        email: 'jmas@yandex.ru'
+        email: 'jmas@yandex.ua'
       });
 
     if (params.populate instanceof Array) {
@@ -60,11 +60,41 @@ module.exports = {
 
     find
       .where(params)
-      .sort({ 'createdAt': 'desc' })
+      .sort({ 'createdAt': -1 })
       .exec(function(err, models) {
-        if (err) { return res.json({ error: err.toString() }, 500); }
+        if (err) { return res.json({ error: err }, 500); }
 
         res.json(models);
       });
+  },
+
+  read: function(req, res) {
+    var params = req.params.all();
+
+    if (! params.id) {
+      return res.json({ error: 'Require id.' }, 500);
+    }
+
+     User
+      .findOne()
+      .where({
+        id: params.id
+      })
+      .populate('readers')
+      .exec(function(err, model) {
+        if (err) return res.json({ error: err }, 500);
+        
+        req.sessionUser.reading.add(model.id);
+
+        req.sessionUser.save(function(err) {
+          if (err) return res.json({ error: err }, 500);
+
+          res.json(model);
+        });
+      });
+  },
+
+  unread: function(req, res) {
+
   }
 };
